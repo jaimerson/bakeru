@@ -1,4 +1,5 @@
 # Bakeru
+[![Build Status](https://travis-ci.org/jaimerson/bakeru.svg?branch=master)](https://travis-ci.org/jaimerson/bakeru)
 ばける (ichidan conjugation, romaji bakeru)
 
   化ける: to appear in disguise, take the form of, change for the worse, corrupt
