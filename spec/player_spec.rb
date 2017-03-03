@@ -3,9 +3,14 @@ require 'src/player'
 
 RSpec.describe Player do
   describe '.new' do
+    let(:frames) { Array.new(16) }
+
     it 'has default options' do
       expected_color = :red
       expected_weapon = :unarmed
+
+      allow(Gosu::Image).to receive(:load_tiles)
+        .and_return(frames)
 
       player = Player.new
 
@@ -18,7 +23,7 @@ RSpec.describe Player do
 
       expect(Gosu::Image).to receive(:load_tiles)
         .with('assets/sprites/imp/red/walk_unarmed.png', width, height)
-        .and_call_original
+        .and_return(frames)
 
       Player.new
     end
