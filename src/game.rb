@@ -1,3 +1,4 @@
+require 'gosu'
 require 'src/player'
 
 class Game < Gosu::Window

@@ -1,3 +1,5 @@
+require 'gosu'
+
 class Player
   def initialize(x, y, color=:red, weapon=:unarmed)
     sprite_path = "assets/sprites/imp/#{color}/walk_#{weapon}.png"
