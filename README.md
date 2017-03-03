@@ -18,3 +18,4 @@ ruby main.rb
  - http://opengameart.org/content/lpc-imp-2
  - http://opengameart.org/content/lpc-goblin
  - Redshrike - graphic artist & William.Thompsonj as contributor
+ - Animation class totally ripped of https://github.com/pogist/gosu-spritesheet-example
