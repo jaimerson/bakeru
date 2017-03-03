@@ -31,13 +31,15 @@ class Game < Gosu::Window
       Gosu::KbRight => ->() { @player.walk :right },
       Gosu::KbUp => ->() { @player.walk :up },
       Gosu::KbDown => ->() { @player.walk :down },
-      Gosu::KbSpace => ->() { @player.shuffle_color_and_weapon }
+      Gosu::KbSpace => ->() { @player.shuffle_color_and_weapon },
+      Gosu::KbA => ->() { @player.attack }
     }.fetch(id, ->() { super }).call
   end
 
   def button_up(id)
     movement_keys = [Gosu::KbUp, Gosu::KbDown, Gosu::KbLeft, Gosu::KbRight]
-    if movement_keys.include?(id)
+    action_keys = [Gosu::KbA]
+    if movement_keys.include?(id) || action_keys.include?(id)
       @player.stop
     end
   end

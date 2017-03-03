@@ -22,7 +22,13 @@ RSpec.describe Player do
       width, height = Player::SPRITE_WIDTH, Player::SPRITE_HEIGHT
 
       expect(Gosu::Image).to receive(:load_tiles)
+        .once
         .with('assets/sprites/imp/red/walk_unarmed.png', width, height)
+        .and_return(frames)
+
+      expect(Gosu::Image).to receive(:load_tiles)
+        .once
+        .with('assets/sprites/imp/red/attack_unarmed.png', width, height)
         .and_return(frames)
 
       Player.new
