@@ -5,6 +5,9 @@ class Player
   SPRITE_WIDTH = 64
   SPRITE_HEIGHT = 64
   SCALE = 1.5
+  SPEED = 3
+  COLORS = [:red, :blue, :green]
+  WEAPONS = [:unarmed, :sword, :pitchfork, :sword_shield, :pitchfork_shield]
 
   attr_reader :color, :weapon, :animations,
     :direction, :moving, :game
@@ -36,16 +39,22 @@ class Player
     @moving = true
 
     {
-      up: ->() { self.vel_y -= 1 },
-      down: ->() { self.vel_y += 1 },
-      left: ->() { self.vel_x -= 1 },
-      right: ->() { self.vel_x += 1 },
+      up: ->() { self.vel_y -= SPEED },
+      down: ->() { self.vel_y += SPEED },
+      left: ->() { self.vel_x -= SPEED },
+      right: ->() { self.vel_x += SPEED },
     }.fetch(direction).call
   end
 
   def stop
     @moving = false
     self.vel_x = self.vel_y = 0
+  end
+
+  def shuffle_color_and_weapon
+    @color = COLORS.sample
+    @weapon = WEAPONS.sample
+    setup_animations
   end
 
   def draw

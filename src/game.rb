@@ -30,7 +30,8 @@ class Game < Gosu::Window
       Gosu::KbLeft => ->() { @player.walk :left },
       Gosu::KbRight => ->() { @player.walk :right },
       Gosu::KbUp => ->() { @player.walk :up },
-      Gosu::KbDown => ->() { @player.walk :down }
+      Gosu::KbDown => ->() { @player.walk :down },
+      Gosu::KbSpace => ->() { @player.shuffle_color_and_weapon }
     }.fetch(id, ->() { super }).call
   end
 
