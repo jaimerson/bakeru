@@ -2,8 +2,9 @@ require 'gosu'
 require 'src/animation'
 
 class Player
-  SPRITE_WIDTH = 58
-  SPRITE_HEIGHT = 60
+  SPRITE_WIDTH = 64
+  SPRITE_HEIGHT = 64
+  SCALE = 1.5
 
   attr_reader :color, :weapon, :animations,
     :direction, :moving, :game
@@ -49,9 +50,9 @@ class Player
 
   def draw
     if moving
-      current_animation.start.draw @x, @y, 1
+      current_animation.start.draw @x, @y, 1, SCALE, SCALE
     else
-      current_animation.stop.draw @x, @y, 1
+      current_animation.stop.draw @x, @y, 1, SCALE, SCALE
     end
   end
 
