@@ -10,7 +10,7 @@ class Player
   WEAPONS = [:unarmed, :sword, :pitchfork, :sword_shield, :pitchfork_shield]
 
   attr_reader :color, :weapon, :animations,
-    :direction, :moving, :game
+    :direction, :moving, :game, :current_action
 
   attr_accessor :vel_x, :vel_y
 
@@ -21,6 +21,7 @@ class Player
     @direction = options[:direction]
     @moving = false
     @game = options[:game]
+    @current_action = :walk
 
     self.vel_x = self.vel_y = 0
 
@@ -46,8 +47,14 @@ class Player
     }.fetch(direction).call
   end
 
+  def attack
+    @current_action = :attack
+    @moving = true
+  end
+
   def stop
     @moving = false
+    @current_action = :walk
     self.vel_x = self.vel_y = 0
   end
 
@@ -68,20 +75,25 @@ class Player
   private
 
   def current_animation
-    animations[:walk][direction]
+    animations[current_action][direction]
   end
 
   def setup_animations
-    sprite_path = "assets/sprites/imp/#{@color}/walk_#{@weapon}.png"
+    @animations = {
+      walk: load_animation(:walk),
+      attack: load_animation(:attack)
+    }
+  end
+
+  def load_animation(action, duration=0.2)
+    sprite_path = "assets/sprites/imp/#{@color}/#{action}_#{@weapon}.png"
     sprites = Gosu::Image.load_tiles(sprite_path, SPRITE_WIDTH, SPRITE_HEIGHT)
 
-    @animations = {
-      walk: {
-        up: Animation.new(sprites[0..3], 0.2),
-        left: Animation.new(sprites[4..7], 0.2),
-        down: Animation.new(sprites[8..11], 0.2),
-        right: Animation.new(sprites[12..15], 0.2)
-      }
+    {
+      up: Animation.new(sprites[0..3], duration),
+      left: Animation.new(sprites[4..7], duration),
+      down: Animation.new(sprites[8..11], duration),
+      right: Animation.new(sprites[12..15], duration)
     }
   end
 
