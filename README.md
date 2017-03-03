@@ -1,4 +1,5 @@
 # Bakeru
+[![Build Status](https://travis-ci.org/jaimerson/bakeru.svg?branch=master)](https://travis-ci.org/jaimerson/bakeru)
 ばける (ichidan conjugation, romaji bakeru)
 
   化ける: to appear in disguise, take the form of, change for the worse, corrupt
@@ -18,3 +19,4 @@ ruby main.rb
  - http://opengameart.org/content/lpc-imp-2
  - http://opengameart.org/content/lpc-goblin
  - Redshrike - graphic artist & William.Thompsonj as contributor
+ - Animation class totally ripped of https://github.com/pogist/gosu-spritesheet-example

@@ -1,3 +1,4 @@
+require 'gosu'
 require 'src/player'
 
 class Game < Gosu::Window
@@ -10,13 +11,13 @@ class Game < Gosu::Window
   def initialize(options={})
     @width = options.delete(:width)
     @height = options.delete(:height)
-    @player = Player.new(@width / 2, @height / 2)
+    @player = Player.new(@width / 2, @height / 2, game: self)
 
     super(@width, @height, options)
   end
 
   def update
-
+    @player.update
   end
 
   def draw
@@ -24,10 +25,19 @@ class Game < Gosu::Window
   end
 
   def button_down(id)
-    if id == Gosu::KB_ESCAPE
-      close
-    else
-      super
+    {
+      Gosu::KB_ESCAPE => ->() { close },
+      Gosu::KbLeft => ->() { @player.walk :left },
+      Gosu::KbRight => ->() { @player.walk :right },
+      Gosu::KbUp => ->() { @player.walk :up },
+      Gosu::KbDown => ->() { @player.walk :down }
+    }.fetch(id, ->() { super }).call
+  end
+
+  def button_up(id)
+    movement_keys = [Gosu::KbUp, Gosu::KbDown, Gosu::KbLeft, Gosu::KbRight]
+    if movement_keys.include?(id)
+      @player.stop
     end
   end
 
