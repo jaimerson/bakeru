@@ -1,5 +1,6 @@
 require 'gosu'
 require 'src/animation'
+require 'src/animation/play_once_animation'
 
 class Player
   SPRITE_WIDTH = 64
@@ -36,6 +37,7 @@ class Player
   end
 
   def walk(direction)
+    @current_action = :walk
     @direction = direction
     @moving = true
 
@@ -54,7 +56,6 @@ class Player
 
   def stop
     @moving = false
-    @current_action = :walk
     self.vel_x = self.vel_y = 0
   end
 
@@ -68,7 +69,9 @@ class Player
     if moving
       current_animation.start.draw @x, @y, 1, SCALE, SCALE
     else
-      current_animation.stop.draw @x, @y, 1, SCALE, SCALE
+      current_animation.stop do
+        @current_action = :walk
+      end.draw @x, @y, 1, SCALE, SCALE
     end
   end
 
@@ -81,19 +84,19 @@ class Player
   def setup_animations
     @animations = {
       walk: load_animation(:walk),
-      attack: load_animation(:attack)
+      attack: load_animation(:attack, animation_entity: PlayOnceAnimation)
     }
   end
 
-  def load_animation(action, duration=0.2)
+  def load_animation(action, duration=0.2, animation_entity: Animation)
     sprite_path = "assets/sprites/imp/#{@color}/#{action}_#{@weapon}.png"
     sprites = Gosu::Image.load_tiles(sprite_path, SPRITE_WIDTH, SPRITE_HEIGHT)
 
     {
-      up: Animation.new(sprites[0..3], duration),
-      left: Animation.new(sprites[4..7], duration),
-      down: Animation.new(sprites[8..11], duration),
-      right: Animation.new(sprites[12..15], duration)
+      up: animation_entity.new(sprites[0..3], duration),
+      left: animation_entity.new(sprites[4..7], duration),
+      down: animation_entity.new(sprites[8..11], duration),
+      right: animation_entity.new(sprites[12..15], duration)
     }
   end
 
