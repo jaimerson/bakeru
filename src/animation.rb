@@ -3,7 +3,7 @@ require 'gosu'
 class Animation
   attr_reader :frames, :time, :type
 
-  def initialize(frames, time_in_secs, type: :continuous)
+  def initialize(frames, time_in_secs)
     raise ArgumentError, 'Frames cannot be empty' if frames.empty?
     raise ArgumentError, 'Time must be > 0' if time_in_secs.to_f <= 0
 
