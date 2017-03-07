@@ -91,11 +91,16 @@ class Player
     else
       current_animation.stop do
         @current_action = :walk
+        @moving = walking?
       end.draw @x, @y, 1, SCALE, SCALE
     end
   end
 
   private
+
+  def walking?
+    self.vel_x != 0 || self.vel_y != 0
+  end
 
   def handle_key_down(id)
     handler = {
