@@ -29,6 +29,7 @@ class Player
     self.vel_x = self.vel_y = 0
 
     setup_animations
+    setup_sounds
 
     @x, @y = x, y
   end
@@ -72,6 +73,8 @@ class Player
 
   def attack
     @current_action = :attack
+    sound_speeds = { sword: 2.5, pitchfork: 0.5, sword_shield: 2.5, pitchfork_shield: 0.5 }
+    @sword.play 0.5, sound_speeds.fetch(@weapon, 0.9)
     @moving = true
   end
 
@@ -136,6 +139,10 @@ class Player
       walk: load_animation(:walk),
       attack: load_animation(:attack, animation_entity: PlayOnceAnimation)
     }
+  end
+
+  def setup_sounds
+    @sword = Gosu::Sample.new('assets/sounds/swing_sword.wav')
   end
 
   def load_animation(action, duration=0.2, animation_entity: Animation)
