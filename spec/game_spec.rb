@@ -37,4 +37,13 @@ RSpec.describe Game do
       described_class.start(caption: title)
     end
   end
+
+  describe '#update' do
+    let(:game) { Game.new(width: 500, height: 500) }
+
+    it 'calls the player#on_update' do
+      expect(game.player).to receive(:on_update)
+      game.update
+    end
+  end
 end

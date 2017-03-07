@@ -15,13 +15,15 @@ class Player
 
   attr_accessor :vel_x, :vel_y
 
-  def initialize(x=0, y=0, opts={})
+  def initialize(game, x=0, y=0, opts={})
+    @game = game
+    @game.add_observer(self)
+
     options = default_options.merge(opts)
     @color = options[:color]
     @weapon = options[:weapon]
     @direction = options[:direction]
     @moving = false
-    @game = options[:game]
     @current_action = :walk
 
     self.vel_x = self.vel_y = 0
@@ -31,9 +33,18 @@ class Player
     @x, @y = x, y
   end
 
-  def update
+  def on_update
     @x = (@x + self.vel_x) % game.width
     @y = (@y + self.vel_y) % game.height
+  end
+
+  def update(event, key_id)
+    handler = {
+      key_down: ->(id) { handle_key_down(id) },
+      key_up: ->(id) { handle_key_up(id) }
+    }[event]
+
+    handler && handler.call(key_id)
   end
 
   def walk(direction)
@@ -49,6 +60,16 @@ class Player
     }.fetch(direction).call
   end
 
+  def stop_walking(direction)
+    if [:left, :right].include? direction
+      self.vel_x = 0
+    elsif [:up, :down].include? direction
+      self.vel_y = 0
+    end
+
+    stop if self.vel_x == 0 && self.vel_y == 0
+  end
+
   def attack
     @current_action = :attack
     @moving = true
@@ -56,7 +77,6 @@ class Player
 
   def stop
     @moving = false
-    self.vel_x = self.vel_y = 0
   end
 
   def shuffle_color_and_weapon
@@ -76,6 +96,31 @@ class Player
   end
 
   private
+
+  def handle_key_down(id)
+    handler = {
+      Gosu::KbLeft => ->() { self.walk :left },
+      Gosu::KbRight => ->() { self.walk :right },
+      Gosu::KbUp => ->() { self.walk :up },
+      Gosu::KbDown => ->() { self.walk :down },
+      Gosu::KbSpace => ->() { self.shuffle_color_and_weapon },
+      Gosu::KbA => ->() { self.attack }
+    }[id]
+
+    handler && handler.call
+  end
+
+  def handle_key_up(id)
+    handler = {
+      Gosu::KbLeft  => ->() { stop_walking(:left) },
+      Gosu::KbUp    => ->() { stop_walking(:up) },
+      Gosu::KbRight => ->() { stop_walking(:right) },
+      Gosu::KbDown  => ->() { stop_walking(:down) },
+      Gosu::KbA     => ->() { stop }
+    }[id]
+
+    handler && handler.call
+  end
 
   def current_animation
     animations[current_action][direction]
