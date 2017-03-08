@@ -1,23 +1,26 @@
 require 'gosu'
+require 'observer'
 require 'src/player'
 
 class Game < Gosu::Window
+  include Observable
+
   def self.start(settings={})
     new(default_settings.merge(settings)).show
   end
 
-  attr_reader :width, :height
+  attr_reader :width, :height, :player
 
   def initialize(options={})
     @width = options.delete(:width)
     @height = options.delete(:height)
-    @player = Player.new(@width / 2, @height / 2, game: self)
+    @player = Player.new(self, @width / 2, @height / 2)
 
     super(@width, @height, options)
   end
 
   def update
-    @player.update
+    @player.on_update
   end
 
   def draw
@@ -25,23 +28,17 @@ class Game < Gosu::Window
   end
 
   def button_down(id)
-    {
-      Gosu::KB_ESCAPE => ->() { close },
-      Gosu::KbLeft => ->() { @player.walk :left },
-      Gosu::KbRight => ->() { @player.walk :right },
-      Gosu::KbUp => ->() { @player.walk :up },
-      Gosu::KbDown => ->() { @player.walk :down },
-      Gosu::KbSpace => ->() { @player.shuffle_color_and_weapon },
-      Gosu::KbA => ->() { @player.attack }
-    }.fetch(id, ->() { super }).call
+    if id == Gosu::KB_ESCAPE
+      close
+    else
+      changed
+      notify_observers(:key_down, id)
+    end
   end
 
   def button_up(id)
-    movement_keys = [Gosu::KbUp, Gosu::KbDown, Gosu::KbLeft, Gosu::KbRight]
-    action_keys = [Gosu::KbA]
-    if movement_keys.include?(id) || action_keys.include?(id)
-      @player.stop
-    end
+    changed
+    notify_observers(:key_up, id)
   end
 
   private
