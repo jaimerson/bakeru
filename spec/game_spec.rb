@@ -1,5 +1,7 @@
 require 'spec_helper'
 require 'src/game'
+require 'src/background'
+require 'src/player'
 
 RSpec.describe Game do
   it 'inherits from Gosu::Window' do
@@ -44,6 +46,27 @@ RSpec.describe Game do
     it 'calls the player#on_update' do
       expect(game.player).to receive(:on_update)
       game.update
+    end
+  end
+
+  describe '#draw' do
+    let(:game) { Game.new(width: 500, height: 500) }
+    let(:player) { instance_double(Player, draw: nil) }
+    let(:background) { instance_double(Background, draw: nil) }
+
+    before do
+      allow(Background).to receive(:new).and_return(background)
+      allow(Player).to receive(:new).and_return(player)
+    end
+
+    it 'calls background#draw' do
+      expect(background).to receive(:draw)
+      game.draw
+    end
+
+    it 'calls player#draw' do
+      expect(player).to receive(:draw)
+      game.draw
     end
   end
 end

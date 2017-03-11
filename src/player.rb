@@ -1,6 +1,7 @@
 require 'gosu'
 require 'src/animation'
 require 'src/animation/play_once_animation'
+require 'src/zorder'
 
 class Player
   SPRITE_WIDTH = 64
@@ -35,8 +36,13 @@ class Player
   end
 
   def on_update
-    @x = (@x + self.vel_x) % game.width
-    @y = (@y + self.vel_y) % game.height
+    @x = (@x + self.vel_x)
+    @y = (@y + self.vel_y)
+
+    @x = 0 if @x < 0
+    @x = game.width - SPRITE_WIDTH if @x + SPRITE_WIDTH > game.width
+    @y = 0 if @y < 0
+    @y = game.height - SPRITE_HEIGHT if @y + SPRITE_HEIGHT > game.height
   end
 
   def update(event, key_id)
@@ -90,7 +96,7 @@ class Player
 
   def draw
     if moving
-      current_animation.start.draw @x, @y, 1, SCALE, SCALE
+      current_animation.start.draw @x, @y, ZOrder::PLAYER, SCALE, SCALE
     else
       current_animation.stop do
         @current_action = :walk
