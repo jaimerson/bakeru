@@ -8,12 +8,16 @@ class Background
   def initialize(game, player)
     @game = game
     @player = player
-    @image = Gosu::Image.new('assets/sprites/tiles/floor/0000_floor_default.bmp')
 
     number_of_x_tiles = (game.width / TILE_SIZE.to_f).ceil
     number_of_y_tiles = (game.height / TILE_SIZE.to_f).ceil
+
     @tiles = Array.new(number_of_x_tiles) do
-      Array.new(number_of_y_tiles) { @image }
+      Array.new(number_of_y_tiles) do
+        number = rand(40..47)
+        file = "assets/sprites/tiles/floor/00#{number}_floor_default.bmp"
+        Gosu::Image.new(file)
+      end
     end
   end
 
