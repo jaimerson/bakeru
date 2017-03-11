@@ -1,6 +1,7 @@
 require 'gosu'
 require 'observer'
 require 'src/player'
+require 'src/background'
 
 class Game < Gosu::Window
   include Observable
@@ -15,16 +16,19 @@ class Game < Gosu::Window
     @width = options.delete(:width)
     @height = options.delete(:height)
     @player = Player.new(self, @width / 2, @height / 2)
+    @background = Background.new(self, @player)
 
     super(@width, @height, options)
   end
 
   def update
     @player.on_update
+    @background.update
   end
 
   def draw
     @player.draw
+    @background.draw
   end
 
   def button_down(id)
