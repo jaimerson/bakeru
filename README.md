@@ -21,3 +21,4 @@ ruby main.rb
  - Redshrike - graphic artist & William.Thompsonj as contributor
  - Animation class totally ripped of https://github.com/pogist/gosu-spritesheet-example
  - Sword sound from https://www.freesound.org/people/Cribbler/sounds/381864/
+ - Background tiles from http://opengameart.org/content/dungeon-tile-set
