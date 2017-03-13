@@ -17,6 +17,8 @@ class Game < Gosu::Window
     @height = options.delete(:height)
     @player = Player.new(self, @width / 2, @height / 2)
     @background = Background.new(self, @player)
+    @bg_sound = Gosu::Song.new('assets/sounds/muffled_wind.ogg')
+    @bg_sound.play(true)
 
     super(@width, @height, options)
   end
