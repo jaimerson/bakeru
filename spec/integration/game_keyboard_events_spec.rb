@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'src/game'
 
 RSpec.describe 'Keyboard events' do
   let(:game) { Game.new(width: 500, height: 500) }
