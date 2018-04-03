@@ -1,18 +1,21 @@
 require 'gosu'
-require 'src/animation'
-require 'src/animation/play_once_animation'
-require 'src/zorder'
+require 'animation'
+require 'animation/play_once_animation'
+require 'zorder'
+require 'models/account'
 
 class Player
   SPRITE_WIDTH = 64
   SPRITE_HEIGHT = 64
   SCALE = 1.5
   SPEED = 3
-  COLORS = [:red, :blue, :green]
-  WEAPONS = [:unarmed, :sword, :pitchfork, :sword_shield, :pitchfork_shield]
+  SOUND_SPEEDS = { sword: 2.5, pitchfork: 0.5, sword_shield: 2.5, pitchfork_shield: 0.5 }.freeze
 
-  attr_reader :color, :weapon, :animations,
-    :direction, :moving, :game, :current_action
+  extend Forwardable
+
+  attr_reader :animations, :direction, :moving, :game, :current_action
+
+  def_delegators :@account, :color, :weapon
 
   attr_accessor :vel_x, :vel_y
 
@@ -20,9 +23,9 @@ class Player
     @game = game
     @game.add_observer(self)
 
+    @account = Account.first_or_initialize(color: 'red', weapon: 'pitchfork')
+
     options = default_options.merge(opts)
-    @color = options[:color]
-    @weapon = options[:weapon]
     @direction = options[:direction]
     @moving = false
     @current_action = :walk
@@ -79,19 +82,12 @@ class Player
 
   def attack
     @current_action = :attack
-    sound_speeds = { sword: 2.5, pitchfork: 0.5, sword_shield: 2.5, pitchfork_shield: 0.5 }
-    @sword.play 0.5, sound_speeds.fetch(@weapon, 0.9)
+    @sword.play 0.5, SOUND_SPEEDS.fetch(@weapon, 0.9)
     @moving = true
   end
 
   def stop
     @moving = false
-  end
-
-  def shuffle_color_and_weapon
-    @color = COLORS.sample
-    @weapon = WEAPONS.sample
-    setup_animations
   end
 
   def draw
@@ -117,7 +113,6 @@ class Player
       Gosu::KbRight => ->() { self.walk :right },
       Gosu::KbUp => ->() { self.walk :up },
       Gosu::KbDown => ->() { self.walk :down },
-      Gosu::KbSpace => ->() { self.shuffle_color_and_weapon },
       Gosu::KbA => ->() { self.attack }
     }[id]
 
@@ -152,7 +147,7 @@ class Player
   end
 
   def load_animation(action, duration=0.2, animation_entity: Animation)
-    sprite_path = "assets/sprites/imp/#{@color}/#{action}_#{@weapon}.png"
+    sprite_path = "assets/sprites/imp/#{color}/#{action}_#{weapon}.png"
     sprites = Gosu::Image.load_tiles(sprite_path, SPRITE_WIDTH, SPRITE_HEIGHT)
 
     {

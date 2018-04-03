@@ -1,5 +1,5 @@
 require 'gosu'
-require 'src/zorder'
+require 'zorder'
 
 class Background
   attr_reader :game, :player

@@ -1,5 +1,5 @@
 require 'gosu'
-require 'src/animation'
+require 'animation'
 
 class PlayOnceAnimation < Animation
   def initialize(*args)

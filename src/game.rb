@@ -1,7 +1,7 @@
 require 'gosu'
 require 'observer'
-require 'src/player'
-require 'src/background'
+require 'player'
+require 'background'
 
 class Game < Gosu::Window
   include Observable

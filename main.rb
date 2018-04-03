@@ -4,8 +4,8 @@ require 'bundler/setup'
 Bundler.setup(:default)
 require 'gosu'
 
-$LOAD_PATH << '.'
+$LOAD_PATH << './src'
 
-require 'src/game'
+require 'game'
 
 Game.start
