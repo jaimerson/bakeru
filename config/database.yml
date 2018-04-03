@@ -1,0 +1,11 @@
+development: &default
+  host: localhost
+  adapter: postgresql
+  encoding: utf-8
+  database: bakeru
+  username: bakeru
+  password: bakeru
+
+test:
+  <<: *default
+  database: bakeru_test
