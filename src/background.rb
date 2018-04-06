@@ -2,25 +2,26 @@ require 'gosu'
 require 'zorder'
 
 class Background
-  attr_reader :game, :player
+  attr_reader :game
   TILE_SIZE = 64
 
-  def initialize(game, player)
+  def initialize(game)
     @game = game
-    @player = player
 
-    number_of_x_tiles = (game.width / TILE_SIZE.to_f).ceil
+    number_of_x_tiles = 20
     number_of_y_tiles = (game.height / TILE_SIZE.to_f).ceil
-    available_tiles = (40..47).map do |number|
-      file = "assets/sprites/tiles/floor/00#{number}_floor_default.bmp"
-      Gosu::Image.new(file)
-    end
+    available_tiles = Dir.glob('assets/sprites/tiles/floor/*').map do |file|
+      [file.split('/').last.split('.').first, Gosu::Image.new(file)]
+    end.to_h
 
     @tiles = Array.new(number_of_x_tiles) do
       Array.new(number_of_y_tiles) do
-        available_tiles.sample
+        available_tiles['0036_floor_default']
       end
     end
+
+    @tiles[5][5] = available_tiles['0014_floor_default']
+    @tiles[6][5] = available_tiles['0015_floor_default']
   end
 
   def update
