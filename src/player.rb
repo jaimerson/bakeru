@@ -21,7 +21,7 @@ class Player
 
   def initialize(game, x=0, y=0, opts={})
     @game = game
-    @game.add_observer(self)
+    @game.lazy_add_observer(self)
 
     @account = Account.first_or_initialize(color: 'red', weapon: 'pitchfork')
 

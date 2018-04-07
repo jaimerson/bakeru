@@ -1,36 +1,41 @@
 require 'gosu'
 require 'observer'
-require 'player'
-require 'background'
+require 'scenes/main_menu'
+require 'scenes/world'
 
 class Game < Gosu::Window
   include Observable
+
+  AVAILABLE_SCENES = {
+    main_menu: MainMenu,
+    world: World
+  }.freeze
 
   def self.start(settings={})
     new(default_settings.merge(settings)).show
   end
 
-  attr_reader :width, :height, :player
+  attr_reader :width, :height, :current_scene
 
   def initialize(options={})
     @width = options.delete(:width)
     @height = options.delete(:height)
-    @player = Player.new(self, @width / 2, @height / 2)
-    @background = Background.new(self)
-    @bg_sound = Gosu::Song.new('assets/sounds/muffled_wind.ogg')
-    @bg_sound.play(true)
+    @observers_to_add = []
+    @current_scene = setup_scene(AVAILABLE_SCENES.values.first)
 
     super(@width, @height, options)
   end
 
   def update
-    @player.on_update
-    @background.update
+    current_scene.on_update
+    @observers_to_add.each do |observer|
+      self.add_observer(observer)
+    end
+    @observers_to_add = []
   end
 
   def draw
-    @player.draw
-    @background.draw
+    current_scene.draw
   end
 
   def button_down(id)
@@ -47,6 +52,19 @@ class Game < Gosu::Window
     notify_observers(:key_up, id)
   end
 
+  def go_to_scene(key)
+    previous_scene = current_scene
+    scene_class = AVAILABLE_SCENES.fetch(key)
+    @current_scene = setup_scene(scene_class)
+    delete_observer(previous_scene)
+  end
+
+  def lazy_add_observer(observer)
+    @observers_to_add |= [observer]
+  end
+
+  StopPropagationError = Class.new(RuntimeError)
+
   private
 
   DEFAULT_SETTINGS = {
@@ -54,6 +72,10 @@ class Game < Gosu::Window
     height: 480,
     width: 640
   }.freeze
+
+  def setup_scene(scene_class)
+    scene_class.new(self)
+  end
 
   def self.default_settings
     DEFAULT_SETTINGS
