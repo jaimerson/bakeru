@@ -64,14 +64,12 @@ module Bakeru
       @observers_to_add |= [observer]
     end
 
-    StopPropagationError = Class.new(RuntimeError)
-
     private
 
     DEFAULT_SETTINGS = {
       fullscreen: false,
-      height: 480,
-      width: 640
+      height: 720,
+      width: 1080
     }.freeze
 
     def setup_scene(scene_class)
