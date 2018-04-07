@@ -6,6 +6,6 @@ require 'gosu'
 
 $LOAD_PATH << './src'
 
-require 'game'
+require 'bakeru'
 
-Game.start
+Bakeru::Game.start

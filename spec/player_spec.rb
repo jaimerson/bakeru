@@ -1,33 +1,35 @@
 require 'spec_helper'
-require 'src/player'
+require 'bakeru/animation'
+require 'bakeru/game'
+require 'bakeru/player'
 
-RSpec.describe Player do
-  let(:game) { instance_double(Game, add_observer: nil) }
+RSpec.describe Bakeru::Player do
+  let(:game) { instance_double(Bakeru::Game, lazy_add_observer: nil) }
 
   describe '.new' do
     let(:frames) { Array.new(16) }
 
     it 'has default options' do
-      expected_color = :red
-      expected_weapon = :unarmed
+      expected_color = 'red'
+      expected_weapon = 'unarmed'
 
       allow(Gosu::Image).to receive(:load_tiles)
         .and_return(frames)
 
-      player = Player.new(game)
+      player = described_class.new(game)
 
       expect(player.color).to eq(expected_color)
       expect(player.weapon).to eq(expected_weapon)
     end
 
     it 'adds itself to the game event subscribers' do
-      expect(game).to receive(:add_observer)
-        .with(an_instance_of(Player))
-      Player.new(game)
+      expect(game).to receive(:lazy_add_observer)
+        .with(an_instance_of(described_class))
+      described_class.new(game)
     end
 
     it 'loads the right tiles' do
-      width, height = Player::SPRITE_WIDTH, Player::SPRITE_HEIGHT
+      width, height = Bakeru::Player::SPRITE_WIDTH, Bakeru::Player::SPRITE_HEIGHT
 
       expect(Gosu::Image).to receive(:load_tiles)
         .once
@@ -39,7 +41,7 @@ RSpec.describe Player do
         .with('assets/sprites/imp/red/attack_unarmed.png', width, height)
         .and_return(frames)
 
-      Player.new(game)
+      described_class.new(game)
     end
 
     describe 'animations setup' do
@@ -52,22 +54,22 @@ RSpec.describe Player do
       let(:expected) do
         a_hash_including({
           walk: {
-            up: an_instance_of(Animation),
-            left: an_instance_of(Animation),
-            down: an_instance_of(Animation),
-            right: an_instance_of(Animation)
+            up: an_instance_of(Bakeru::Animation),
+            left: an_instance_of(Bakeru::Animation),
+            down: an_instance_of(Bakeru::Animation),
+            right: an_instance_of(Bakeru::Animation)
           },
           attack: {
-            up: an_instance_of(PlayOnceAnimation),
-            left: an_instance_of(PlayOnceAnimation),
-            down: an_instance_of(PlayOnceAnimation),
-            right: an_instance_of(PlayOnceAnimation)
+            up: an_instance_of(Bakeru::PlayOnceAnimation),
+            left: an_instance_of(Bakeru::PlayOnceAnimation),
+            down: an_instance_of(Bakeru::PlayOnceAnimation),
+            right: an_instance_of(Bakeru::PlayOnceAnimation)
           }
         })
       end
 
       it 'sets up the animations as expected' do
-        animations = Player.new(game).animations
+        animations = described_class.new(game).animations
         expect(animations).to match(expected)
       end
     end

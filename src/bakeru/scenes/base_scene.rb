@@ -1,4 +1,5 @@
-class BaseScene
+module Bakeru
+  class BaseScene
   attr_reader :game
 
   def initialize(game, options={})
@@ -22,5 +23,6 @@ class BaseScene
 
   def draw
     raise NotImplementedError
+  end
   end
 end

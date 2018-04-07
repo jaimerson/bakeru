@@ -1,9 +1,7 @@
 require 'spec_helper'
-require 'src/game'
-require 'src/background'
-require 'src/player'
+require 'src/bakeru/game'
 
-RSpec.describe Game do
+RSpec.describe Bakeru::Game do
   it 'inherits from Gosu::Window' do
     expect(described_class.ancestors).to include(Gosu::Window)
   end
@@ -41,22 +39,27 @@ RSpec.describe Game do
   end
 
   describe '#update' do
-    let(:game) { Game.new(width: 500, height: 500) }
+    let(:game) { described_class.new(width: 500, height: 500) }
+
+    before do
+      game.go_to_scene(:world)
+    end
 
     it 'calls the player#on_update' do
-      expect(game.player).to receive(:on_update)
+      expect(game.current_scene.player).to receive(:on_update)
       game.update
     end
   end
 
   describe '#draw' do
-    let(:game) { Game.new(width: 500, height: 500) }
-    let(:player) { instance_double(Player, draw: nil) }
-    let(:background) { instance_double(Background, draw: nil) }
+    let(:game) { described_class.new(width: 500, height: 500) }
+    let(:player) { instance_double(Bakeru::Player, draw: nil) }
+    let(:background) { instance_double(Bakeru::Background, draw: nil) }
 
     before do
-      allow(Background).to receive(:new).and_return(background)
-      allow(Player).to receive(:new).and_return(player)
+      allow(Bakeru::Background).to receive(:new).and_return(background)
+      allow(Bakeru::Player).to receive(:new).and_return(player)
+      game.go_to_scene(:world)
     end
 
     it 'calls background#draw' do

@@ -1,12 +1,12 @@
 require 'spec_helper'
-require 'src/animation'
+require 'src/bakeru/animation'
 
-RSpec.describe Animation do
-  subject(:animation) { Animation.new(frames, time_in_secs) }
+RSpec.describe Bakeru::Animation do
+  subject(:animation) { described_class.new(frames, time_in_secs) }
   let(:frames) { [1,2,3] }
   let(:time_in_secs) { 1 }
 
-  describe 'validations' do
+  describe '.validations' do
     context 'when frames are empty' do
       let(:frames) { [] }
 
