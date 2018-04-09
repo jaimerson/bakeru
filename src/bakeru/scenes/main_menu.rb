@@ -1,64 +1,51 @@
 require 'gosu'
 require 'bakeru/zorder'
 require 'bakeru/scenes/base_scene'
+require 'bakeru/scenes/world'
+require 'bakeru/ui/menu'
 
 module Bakeru
-  class MainMenu < BaseScene
-    attr_reader :selected_option, :font, :available_options
-    FONT_SIZE = 50
+  module Scenes
+    class MainMenu < BaseScene
+      attr_reader :menu, :font
+      FONT_SIZE = 50
 
-    def initialize(*args)
-      super
-      @available_options = ['New Game', 'Load Game', 'Options', 'Quit']
-      @selected_option = 0
-    end
-
-    def setup
-      @font = Gosu::Font.new(FONT_SIZE, name: 'Courier')
-    end
-
-    def update(event, key_id)
-      return unless event == :key_down
-
-      case key_id
-      when Gosu::KbReturn
-        game.go_to_scene(:world)
-      when Gosu::KbDown
-        next_option
-      when Gosu::KbUp
-        previous_option
+      def initialize(*args)
+        super
+        character = Character.first_or_initialize(color: 'red', weapon: 'pitchfork_shield')
+        options = {
+          'New Game' => -> { game.go_to_scene(World, character: character) },
+          'Load Game' => -> { puts 'Load Game' },
+          'Options' => -> { puts 'Options' },
+          'Quit' => -> { game.close }
+        }
+        @menu = UI::Menu.new(options)
       end
-    end
 
-    def draw
-      available_options.each_with_index do |option, index|
-        x = (game.width / 2) - FONT_SIZE * option.length / 4
-        y = (game.height / 2) + FONT_SIZE * index
-        font.draw(option, x, y, ZOrder::UI, 1, 1, color_for(index))
+      def setup
+        @font = Gosu::Font.new(FONT_SIZE, name: 'Courier')
       end
-    end
 
-    private
+      def update(event, key_id)
+        return unless event == :key_down
 
-    def next_option
-      if @selected_option + 1 >= available_options.length
-        @selected_option = 0
-      else
-        @selected_option += 1
+        case key_id
+        when Gosu::KbReturn
+          menu.execute
+        when Gosu::KbDown
+          menu.next_option
+        when Gosu::KbUp
+          menu.previous_option
+        end
       end
-    end
 
-    def previous_option
-      if @selected_option - 1 < 0
-        @selected_option = available_options.length - 1
-      else
-        @selected_option -= 1
+      def draw
+        menu.options_with_colors.each_with_index do |(option, color), index|
+          x = (game.width / 2) - FONT_SIZE * option.title.length / 4
+          y = (game.height / 2) + FONT_SIZE * index
+          font.draw(option.title, x, y, ZOrder::UI, 1, 1, color)
+        end
       end
-    end
-
-    def color_for(index)
-      return 0xff_ececff if index != selected_option
-      0xff_aa0a00
     end
   end
 end

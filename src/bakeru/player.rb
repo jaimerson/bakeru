@@ -2,7 +2,7 @@ require 'gosu'
 require 'bakeru/animation'
 require 'bakeru/animation/play_once_animation'
 require 'bakeru/zorder'
-require 'bakeru/models/account'
+require 'bakeru/models/character'
 
 module Bakeru
   class Player
@@ -16,15 +16,15 @@ module Bakeru
 
     attr_reader :animations, :direction, :moving, :game, :current_action
 
-    def_delegators :@account, :color, :weapon
+    def_delegators :@character, :color, :weapon
 
     attr_accessor :vel_x, :vel_y
 
-    def initialize(game, x=0, y=0, opts={})
+    def initialize(game, character, x=0, y=0, opts={})
       @game = game
       @game.lazy_add_observer(self)
 
-      @account = Account.first_or_initialize(color: 'red', weapon: 'unarmed')
+      @character = character
 
       options = default_options.merge(opts)
       @direction = options[:direction]

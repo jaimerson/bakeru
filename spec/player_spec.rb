@@ -4,6 +4,7 @@ require 'bakeru/game'
 require 'bakeru/player'
 
 RSpec.describe Bakeru::Player do
+  let(:character) { Bakeru::Character.new(color: 'red', weapon: 'unarmed') }
   let(:game) { instance_double(Bakeru::Game, lazy_add_observer: nil) }
 
   describe '.new' do
@@ -16,7 +17,7 @@ RSpec.describe Bakeru::Player do
       allow(Gosu::Image).to receive(:load_tiles)
         .and_return(frames)
 
-      player = described_class.new(game)
+      player = described_class.new(game, character)
 
       expect(player.color).to eq(expected_color)
       expect(player.weapon).to eq(expected_weapon)
@@ -25,7 +26,7 @@ RSpec.describe Bakeru::Player do
     it 'adds itself to the game event subscribers' do
       expect(game).to receive(:lazy_add_observer)
         .with(an_instance_of(described_class))
-      described_class.new(game)
+      described_class.new(game, character)
     end
 
     it 'loads the right tiles' do
@@ -41,7 +42,7 @@ RSpec.describe Bakeru::Player do
         .with('assets/sprites/imp/red/attack_unarmed.png', width, height)
         .and_return(frames)
 
-      described_class.new(game)
+      described_class.new(game, character)
     end
 
     describe 'animations setup' do
@@ -69,7 +70,7 @@ RSpec.describe Bakeru::Player do
       end
 
       it 'sets up the animations as expected' do
-        animations = described_class.new(game).animations
+        animations = described_class.new(game, character).animations
         expect(animations).to match(expected)
       end
     end

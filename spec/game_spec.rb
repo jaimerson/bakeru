@@ -1,7 +1,11 @@
 require 'spec_helper'
-require 'src/bakeru/game'
+require 'bakeru/game'
+require 'bakeru/scenes/world'
+require 'bakeru/models/character'
 
 RSpec.describe Bakeru::Game do
+  let(:character) { Bakeru::Character.new(color: 'red', weapon: 'sword') }
+
   it 'inherits from Gosu::Window' do
     expect(described_class.ancestors).to include(Gosu::Window)
   end
@@ -10,8 +14,8 @@ RSpec.describe Bakeru::Game do
     let(:default_settings) do
       {
         fullscreen: false,
-        height: 480,
-        width: 640
+        height: 720,
+        width: 1080
       }
     end
 
@@ -42,7 +46,7 @@ RSpec.describe Bakeru::Game do
     let(:game) { described_class.new(width: 500, height: 500) }
 
     before do
-      game.go_to_scene(:world)
+      game.go_to_scene(Bakeru::Scenes::World, character: character)
     end
 
     it 'calls the player#on_update' do
@@ -59,7 +63,7 @@ RSpec.describe Bakeru::Game do
     before do
       allow(Bakeru::Background).to receive(:new).and_return(background)
       allow(Bakeru::Player).to receive(:new).and_return(player)
-      game.go_to_scene(:world)
+      game.go_to_scene(Bakeru::Scenes::World, character: character)
     end
 
     it 'calls background#draw' do

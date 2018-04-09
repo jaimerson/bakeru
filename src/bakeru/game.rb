@@ -1,16 +1,10 @@
 require 'gosu'
 require 'observer'
 require 'bakeru/scenes/main_menu'
-require 'bakeru/scenes/world'
 
 module Bakeru
   class Game < Gosu::Window
     include Observable
-
-    AVAILABLE_SCENES = {
-      main_menu: MainMenu,
-      world: World
-    }.freeze
 
     def self.start(settings={})
       new(default_settings.merge(settings)).show
@@ -22,7 +16,7 @@ module Bakeru
       @width = options.delete(:width)
       @height = options.delete(:height)
       @observers_to_add = []
-      @current_scene = setup_scene(AVAILABLE_SCENES.values.first)
+      @current_scene = setup_scene(Scenes::MainMenu)
 
       super(@width, @height, options)
     end
@@ -53,10 +47,9 @@ module Bakeru
       notify_observers(:key_up, id)
     end
 
-    def go_to_scene(key)
+    def go_to_scene(scene_class, options={})
       previous_scene = current_scene
-      scene_class = AVAILABLE_SCENES.fetch(key)
-      @current_scene = setup_scene(scene_class)
+      @current_scene = setup_scene(scene_class, options)
       delete_observer(previous_scene)
     end
 
@@ -72,8 +65,8 @@ module Bakeru
       width: 1080
     }.freeze
 
-    def setup_scene(scene_class)
-      scene_class.new(self)
+    def setup_scene(scene_class, options={})
+      scene_class.new(self, options)
     end
 
     def self.default_settings

@@ -1,12 +1,15 @@
 require 'spec_helper'
-require 'src/bakeru/game'
+require 'bakeru/game'
+require 'bakeru/scenes/world'
+require 'bakeru/models/character'
 
 RSpec.describe 'Keyboard events' do
   let(:game) { Bakeru::Game.new(width: 500, height: 500) }
   let(:scene) { game.current_scene }
 
   before do
-    game.go_to_scene(:world)
+    character = Bakeru::Character.new(color: 'red', weapon: 'unarmed')
+    game.go_to_scene(Bakeru::Scenes::World, character: character)
     game.update
   end
 
