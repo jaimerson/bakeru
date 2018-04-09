@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408232858) do
+ActiveRecord::Schema.define(version: 20180409084928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(version: 20180408232858) do
   create_table "characters", id: :serial, force: :cascade do |t|
     t.string "color", null: false
     t.string "weapon", default: "unarmed", null: false
+    t.integer "vitality", default: 1, null: false
+    t.integer "strength", default: 1, null: false
+    t.integer "magic", default: 1, null: false
+    t.integer "endurance", default: 1, null: false
   end
 
 end
