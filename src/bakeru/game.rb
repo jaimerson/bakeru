@@ -1,11 +1,8 @@
 require 'gosu'
-require 'observer'
 require 'bakeru/scenes/main_menu'
 
 module Bakeru
   class Game < Gosu::Window
-    include Observable
-
     def self.start(settings={})
       new(default_settings.merge(settings)).show
     end
@@ -15,7 +12,6 @@ module Bakeru
     def initialize(options={})
       @width = options.delete(:width)
       @height = options.delete(:height)
-      @observers_to_add = []
       @current_scene = setup_scene(Scenes::MainMenu)
 
       super(@width, @height, options)
@@ -23,10 +19,6 @@ module Bakeru
 
     def update
       current_scene.on_update
-      @observers_to_add.each do |observer|
-        self.add_observer(observer)
-      end
-      @observers_to_add = []
     end
 
     def draw
@@ -37,24 +29,16 @@ module Bakeru
       if id == Gosu::KB_ESCAPE
         close
       else
-        changed
-        notify_observers(:key_down, id)
+        current_scene.button_down(id)
       end
     end
 
     def button_up(id)
-      changed
-      notify_observers(:key_up, id)
+      current_scene.button_up(id)
     end
 
     def go_to_scene(scene_class, options={})
-      previous_scene = current_scene
       @current_scene = setup_scene(scene_class, options)
-      delete_observer(previous_scene)
-    end
-
-    def lazy_add_observer(observer)
-      @observers_to_add |= [observer]
     end
 
     private

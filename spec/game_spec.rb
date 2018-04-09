@@ -50,7 +50,7 @@ RSpec.describe Bakeru::Game do
     end
 
     it 'calls the player#on_update' do
-      expect(game.current_scene.player).to receive(:on_update)
+      expect(game.current_scene.player).to receive(:update)
       game.update
     end
   end

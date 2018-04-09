@@ -22,8 +22,6 @@ module Bakeru
 
     def initialize(game, character, x=0, y=0, opts={})
       @game = game
-      @game.lazy_add_observer(self)
-
       @character = character
 
       options = default_options.merge(opts)
@@ -39,7 +37,7 @@ module Bakeru
       @x, @y = x, y
     end
 
-    def on_update
+    def update
       @x = (@x + self.vel_x)
       @y = (@y + self.vel_y)
 
@@ -49,13 +47,12 @@ module Bakeru
       @y = game.height - SPRITE_HEIGHT if @y + SPRITE_HEIGHT > game.height
     end
 
-    def update(event, key_id)
-      handler = {
-        key_down: ->(id) { handle_key_down(id) },
-        key_up: ->(id) { handle_key_up(id) }
-      }[event]
+    def button_down(key_id)
+      handle_key_down(key_id)
+    end
 
-      handler && handler.call(key_id)
+    def button_up(key_id)
+      handle_key_up(key_id)
     end
 
     def walk(direction)

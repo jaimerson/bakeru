@@ -26,9 +26,7 @@ module Bakeru
         @font = Gosu::Font.new(FONT_SIZE, name: 'Courier')
       end
 
-      def update(event, key_id)
-        return unless event == :key_down
-
+      def button_down(key_id)
         case key_id
         when Gosu::KbReturn
           menu.execute

@@ -5,7 +5,7 @@ require 'bakeru/player'
 
 RSpec.describe Bakeru::Player do
   let(:character) { Bakeru::Character.new(color: 'red', weapon: 'unarmed') }
-  let(:game) { instance_double(Bakeru::Game, lazy_add_observer: nil) }
+  let(:game) { instance_double(Bakeru::Game) }
 
   describe '.new' do
     let(:frames) { Array.new(16) }
@@ -21,12 +21,6 @@ RSpec.describe Bakeru::Player do
 
       expect(player.color).to eq(expected_color)
       expect(player.weapon).to eq(expected_weapon)
-    end
-
-    it 'adds itself to the game event subscribers' do
-      expect(game).to receive(:lazy_add_observer)
-        .with(an_instance_of(described_class))
-      described_class.new(game, character)
     end
 
     it 'loads the right tiles' do

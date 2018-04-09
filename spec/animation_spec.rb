@@ -38,14 +38,6 @@ RSpec.describe Bakeru::Animation do
     end
   end
 
-  describe '#time' do
-    let(:time_in_secs) { 3.2 }
-
-    it 'multiplies given time in secs by 1000' do
-      expect(animation.time).to eq(3200)
-    end
-  end
-
   describe '#start' do
     let(:time_in_secs) { 2 }
 
@@ -55,30 +47,6 @@ RSpec.describe Bakeru::Animation do
 
     context 'when Gosu.milliseconds is called for the first time and returns 0' do
       let(:milliseconds) { 0 }
-
-      it 'brings the first frame' do
-        expect(animation.start).to eq(frames.first)
-      end
-    end
-
-    context 'when Gosu.milliseconds / time % frames.size = frames.size - 1' do
-      let(:milliseconds) { 22_000 }
-
-      it 'brings the last frame' do
-        expect(animation.start).to eq(frames.last)
-      end
-    end
-
-    context 'when Gosu.milliseconds is multiple of time' do
-      let(:milliseconds) { 10 * time_in_secs * 1000 }
-
-      it 'brings the second frame' do
-        expect(animation.start).to eq(frames[1])
-      end
-    end
-
-    context 'when Gosu.milliseconds is 3 times the time in secs' do
-      let(:milliseconds) { 3 * time_in_secs * 1000 }
 
       it 'brings the first frame' do
         expect(animation.start).to eq(frames.first)

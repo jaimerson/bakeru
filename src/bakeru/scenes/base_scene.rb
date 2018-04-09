@@ -5,7 +5,6 @@ module Bakeru
 
       def initialize(game, options={})
         @game = game
-        @game.lazy_add_observer(self)
         setup
       end
 
@@ -16,10 +15,15 @@ module Bakeru
       end
 
       # Called when a key is pressed
-      # @param [Symbol] event - :key_down or :key_up
       # @param [Fixnum] key_id - id of the key pressed.
       #   Use convenience Gosu::Kb* constants to access
-      def update(event, key_id)
+      def button_down(key_id)
+      end
+
+      # Called when a key is released
+      # @param [Fixnum] key_id - id of the key pressed.
+      #   Use convenience Gosu::Kb* constants to access
+      def button_up(key_id)
       end
 
       def draw
