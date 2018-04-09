@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'bakeru/animation'
 require 'bakeru/game'
 require 'bakeru/player'
+require 'bakeru/models/imp'
 
 RSpec.describe Bakeru::Player do
   let(:character) { Bakeru::Character.new(color: 'red', weapon: 'unarmed') }
@@ -24,7 +25,7 @@ RSpec.describe Bakeru::Player do
     end
 
     it 'loads the right tiles' do
-      width, height = Bakeru::Player::SPRITE_WIDTH, Bakeru::Player::SPRITE_HEIGHT
+      width, height = Bakeru::Imp::SPRITE_WIDTH, Bakeru::Imp::SPRITE_HEIGHT
 
       expect(Gosu::Image).to receive(:load_tiles)
         .once

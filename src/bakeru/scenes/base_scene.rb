@@ -11,7 +11,7 @@ module Bakeru
       def setup
       end
 
-      def on_update
+      def update
       end
 
       # Called when a key is pressed
@@ -28,6 +28,9 @@ module Bakeru
 
       def draw
         raise NotImplementedError
+      end
+
+      def teardown
       end
     end
   end

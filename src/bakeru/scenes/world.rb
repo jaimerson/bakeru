@@ -6,11 +6,7 @@ require 'bakeru/player'
 module Bakeru
   module Scenes
     class World < BaseScene
-      extend Forwardable
-
       attr_reader :player, :background, :bg_sound
-
-      def_delegators :@player, :button_down, :button_up
 
       def initialize(game, options={})
         super
@@ -24,7 +20,15 @@ module Bakeru
         @bg_sound.play(true)
       end
 
-      def on_update
+      def button_down(key_id)
+        player.button_down(key_id)
+      end
+
+      def button_up(key_id)
+        player.button_up(key_id)
+      end
+
+      def update
         player.update
         background.update
       end

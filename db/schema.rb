@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409084928) do
+ActiveRecord::Schema.define(version: 20180409090125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20180409084928) do
     t.integer "strength", default: 1, null: false
     t.integer "magic", default: 1, null: false
     t.integer "endurance", default: 1, null: false
+    t.string "name", null: false
+    t.integer "level", default: 1, null: false
   end
 
 end

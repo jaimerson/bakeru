@@ -2,6 +2,7 @@ require 'gosu'
 require 'bakeru/zorder'
 require 'bakeru/scenes/base_scene'
 require 'bakeru/scenes/world'
+require 'bakeru/scenes/create_character'
 require 'bakeru/ui/menu'
 
 module Bakeru
@@ -14,8 +15,8 @@ module Bakeru
         super
         character = Character.first_or_initialize(color: 'red', weapon: 'pitchfork_shield')
         options = {
-          'New Game' => -> { game.go_to_scene(World, character: character) },
-          'Load Game' => -> { puts 'Load Game' },
+          'New Game' => -> { game.go_to_scene(CreateCharacter) },
+          'Load Game' => -> { game.go_to_scene(World, character: character) },
           'Options' => -> { puts 'Options' },
           'Quit' => -> { game.close }
         }

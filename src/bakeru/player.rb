@@ -3,11 +3,10 @@ require 'bakeru/animation'
 require 'bakeru/animation/play_once_animation'
 require 'bakeru/zorder'
 require 'bakeru/models/character'
+require 'bakeru/models/imp'
 
 module Bakeru
   class Player
-    SPRITE_WIDTH = 64
-    SPRITE_HEIGHT = 64
     SCALE = 1.5
     SPEED = 3
     SOUND_SPEEDS = { sword: 2.5, pitchfork: 0.5, sword_shield: 2.5, pitchfork_shield: 0.5 }.freeze
@@ -42,9 +41,9 @@ module Bakeru
       @y = (@y + self.vel_y)
 
       @x = 0 if @x < 0
-      @x = game.width - SPRITE_WIDTH if @x + SPRITE_WIDTH > game.width
+      @x = game.width - Imp::SPRITE_WIDTH if @x + Imp::SPRITE_WIDTH > game.width
       @y = 0 if @y < 0
-      @y = game.height - SPRITE_HEIGHT if @y + SPRITE_HEIGHT > game.height
+      @y = game.height - Imp::SPRITE_HEIGHT if @y + Imp::SPRITE_HEIGHT > game.height
     end
 
     def button_down(key_id)
@@ -145,8 +144,7 @@ module Bakeru
     end
 
     def load_animation(action, duration=0.5, animation_entity: Animation)
-      sprite_path = "assets/sprites/imp/#{color}/#{action}_#{weapon}.png"
-      sprites = Gosu::Image.load_tiles(sprite_path, SPRITE_WIDTH, SPRITE_HEIGHT)
+      sprites = Imp.load_sprites(action, weapon: weapon, color: color)
 
       {
         up: animation_entity.new(sprites[0..3], duration),

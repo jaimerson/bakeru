@@ -18,7 +18,7 @@ module Bakeru
     end
 
     def update
-      current_scene.on_update
+      current_scene.update
     end
 
     def draw
@@ -27,7 +27,7 @@ module Bakeru
 
     def button_down(id)
       if id == Gosu::KB_ESCAPE
-        close
+        go_to_scene(Scenes::MainMenu)
       else
         current_scene.button_down(id)
       end
@@ -38,7 +38,9 @@ module Bakeru
     end
 
     def go_to_scene(scene_class, options={})
+      previous_scene = current_scene
       @current_scene = setup_scene(scene_class, options)
+      previous_scene.teardown
     end
 
     private

@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'bakeru/game'
 require 'bakeru/scenes/world'
+require 'bakeru/scenes/main_menu'
 require 'bakeru/models/character'
 
 RSpec.describe 'Keyboard events' do
@@ -14,8 +15,8 @@ RSpec.describe 'Keyboard events' do
   end
 
   context 'when it is a key down' do
-    it 'closes the game when key is ESC' do
-      expect(game).to receive(:close)
+    it 'goes to main menu when key is ESC' do
+      expect(game).to receive(:go_to_scene).with(Bakeru::Scenes::MainMenu)
       game.button_down(Gosu::KB_ESCAPE)
     end
 
