@@ -147,7 +147,7 @@ module Bakeru
       @sword = Gosu::Sample.new('assets/sounds/swing_sword.wav')
     end
 
-    def load_animation(action, duration=0.2, animation_entity: Animation)
+    def load_animation(action, duration=0.5, animation_entity: Animation)
       sprite_path = "assets/sprites/imp/#{color}/#{action}_#{weapon}.png"
       sprites = Gosu::Image.load_tiles(sprite_path, SPRITE_WIDTH, SPRITE_HEIGHT)
 
