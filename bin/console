@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'bundler/setup'
+
+Bundler.setup(:default)
+require 'gosu'
+
+$LOAD_PATH << './src'
+
+require 'bakeru'
+require 'pry'
+require 'bakeru/models/character'
+require 'bakeru/models/location'
+Pry.start
