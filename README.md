@@ -23,3 +23,4 @@ ruby main.rb
  - Sword sound from https://www.freesound.org/people/Cribbler/sounds/381864/
  - Background tiles from http://opengameart.org/content/dungeon-tile-set
  - Background sound from https://www.freesound.org/people/IanStarGem/sounds/269591/
+ - Sword sprite from https://opengameart.org/content/short-sword-64x64
