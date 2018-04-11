@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409090125) do
+ActiveRecord::Schema.define(version: 20180411192259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,4 +26,12 @@ ActiveRecord::Schema.define(version: 20180409090125) do
     t.integer "level", default: 1, null: false
   end
 
+  create_table "locations", id: :serial, force: :cascade do |t|
+    t.string "template", null: false
+    t.jsonb "tiles", null: false
+    t.integer "character_id"
+    t.index ["character_id"], name: "index_locations_on_character_id"
+  end
+
+  add_foreign_key "locations", "characters"
 end

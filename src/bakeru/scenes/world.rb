@@ -2,6 +2,8 @@ require 'gosu'
 require 'bakeru/scenes/base_scene'
 require 'bakeru/background'
 require 'bakeru/player'
+require 'bakeru/map_templates'
+require 'bakeru/models/location'
 
 module Bakeru
   module Scenes
@@ -12,7 +14,8 @@ module Bakeru
         super
         character = options.fetch(:character)
         @player = Player.new(game, character, game.width / 2, game.height / 2)
-        @background = Background.new(game)
+        location = Location.build(Bakeru::MapTemplates::DungeonOfDespair)
+        @background = Background.new(location)
       end
 
       def setup

@@ -7,5 +7,6 @@ module Bakeru
     validates :weapon, presence: true, inclusion: { in: Imp::WEAPONS }
 
     validates :name, presence: true
+    has_many :locations
   end
 end

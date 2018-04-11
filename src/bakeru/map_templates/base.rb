@@ -1,0 +1,54 @@
+module Bakeru
+  module MapTemplates
+    class Base
+      class << self
+        attr_accessor :map
+
+        def define_map(x_tiles, y_tiles, &block)
+          map = Map.new(x_tiles, y_tiles)
+          map.instance_eval(&block)
+          self.map = map.tile_names
+        end
+      end
+
+      class Map
+        attr_reader :number_of_x_tiles, :number_of_y_tiles
+
+        def initialize(number_of_x_tiles, number_of_y_tiles)
+          @number_of_x_tiles = number_of_x_tiles
+          @number_of_y_tiles = number_of_y_tiles
+          @custom_tiles = {}
+        end
+
+        def default_tile(tile)
+          @default_tile = tile
+        end
+
+        def tile_names
+          tiles = Array.new(number_of_x_tiles) do
+            Array.new(number_of_y_tiles) do
+              @default_tile
+            end
+          end
+
+          apply_custom_tiles(tiles)
+        end
+
+        def apply_custom_tiles(tiles)
+          return tiles if @custom_tiles.empty?
+          @custom_tiles.each do |(i, j), value|
+            tiles[i][j] = value
+          end
+          tiles
+        end
+
+        def tiles(list_of_tiles, value)
+          list_of_tiles.each do |tile|
+            @custom_tiles[tile] = value
+          end
+        end
+
+      end
+    end
+  end
+end

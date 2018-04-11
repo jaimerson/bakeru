@@ -26,11 +26,15 @@ module Bakeru
         @font = Gosu::Font.new(FONT_SIZE, name: 'Courier')
         @game.text_input = @name_text_input = TextInput.new
         @animations = load_animations
+        @message = nil
       end
 
       def draw
         font.draw('Name:', 10, 10, ZOrder::UI, 1, 1, 0xff_bf0a0a)
         font.draw(name_text_input.text, font.text_width('Name:') + 20, 10, ZOrder::UI, 1, 1, 0xff_bfbb30)
+        if @message
+          font.draw(@message, font.text_width(name_text_input.text) + 200, 10, ZOrder::UI, 1, 1, 0xff_bfbbff)
+        end
         selected_build.each_with_index do |(key, value), index|
           font.draw("#{key}:", 10, 20 * index + FONT_SIZE, ZOrder::UI, 1, 1, 0xff_bf0a0a)
           font.draw(value, font.text_width(key) + 30, 20 * index + FONT_SIZE, ZOrder::UI, 1, 1, 0xff_bfbb30)
@@ -80,8 +84,11 @@ module Bakeru
       def submit
         character.attributes = selected_build
           .merge(name: name_text_input.text)
-        character.save!
-        game.go_to_scene(World, character: character)
+        if character.save
+          game.go_to_scene(World, character: character)
+        else
+          @message = character.errors.full_messages.join(';')
+        end
       end
     end
   end
