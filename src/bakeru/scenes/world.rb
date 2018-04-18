@@ -15,7 +15,7 @@ module Bakeru
         character = options.fetch(:character)
         @player = Player.new(game, character, game.width / 2, game.height / 2)
         location = Location.build(Bakeru::MapTemplates::DungeonOfDespair)
-        @background = Background.new(location)
+        @background = Background.new(game, location)
       end
 
       def setup

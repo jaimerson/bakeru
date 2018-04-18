@@ -8,6 +8,12 @@ gem 'activerecord', '5.1.6'
 gem 'pg'
 gem 'rake'
 
+# Graphics
+gem 'opengl'
+gem 'ruby-opengl'
+gem 'glu'
+gem 'glut'
+
 group :test do
   gem 'rspec'
 end

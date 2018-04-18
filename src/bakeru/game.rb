@@ -1,8 +1,11 @@
 require 'gosu'
 require 'bakeru/scenes/main_menu'
+require 'gl'
 
 module Bakeru
   class Game < Gosu::Window
+    include Gl
+
     def self.start(settings={})
       new(default_settings.merge(settings)).show
     end
@@ -22,7 +25,9 @@ module Bakeru
     end
 
     def draw
-      current_scene.draw
+      gl do
+        current_scene.draw
+      end
     end
 
     def button_down(id)
