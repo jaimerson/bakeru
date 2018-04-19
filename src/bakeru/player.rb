@@ -13,7 +13,7 @@ module Bakeru
 
     extend Forwardable
 
-    attr_reader :animations, :direction, :moving, :game, :current_action
+    attr_reader :animations, :direction, :moving, :game, :current_action, :x, :y
 
     def_delegators :@character, :color, :weapon
 
