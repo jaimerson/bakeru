@@ -6,6 +6,7 @@ gem 'gosu'
 gem 'pry'
 gem 'activerecord'
 gem 'pg'
+gem 'crystalball', path: '../toptal/crystalball'
 
 group :test do
   gem 'rspec'

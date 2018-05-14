@@ -10,6 +10,19 @@ require 'pry'
 
 ENV['GOSU_ENV'] = 'test'
 
+if ENV['CRYSTALBALL_MAP'] == 'true'
+  require 'crystalball'
+
+  Crystalball::MapGenerator.start! do |c|
+    c.register Crystalball::MapGenerator::AllocatedObjectsStrategy.build(only: %w[ActiveRecord::Base])
+    c.register Crystalball::MapGenerator::CoverageStrategy.new
+    c.register Crystalball::MapGenerator::DescribedClassStrategy.new
+    c.commit = ENV['GIT_COMMIT'] if ENV['GIT_COMMIT']
+    c.version = 1
+    c.map_storage_path = "tmp/execution_map.yml"
+  end
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
