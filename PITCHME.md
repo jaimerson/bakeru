@@ -90,13 +90,21 @@ Person.find_by(name: 'John Doe').delete # DB delete
 ```ruby
 class Book < ActiveRecord::Base
   validates :title, :author, presence: true
+  validates :title, uniqueness: { scope: :author }
 end
 
 #irb
 b = Book.new(author: 'Mary Jane Watson')
 b.valid? # false
-b.errors # "Title can't be emtpy"
+b.errors # "Title can't be empty"
+b.save   # false
+b.save!  # raise `ActiveRecord::RecordInvalid, "Title can't be empty"
 ```
+@[2] (Definição da validação. `presence: true` valida se o atributo está presente e, no caso de strings se é diferente da string vazia. Outros tipos de validação incluem, mas não são limitados a, inclusão em `ranges`, unicidade, formato da string, ou qualquer método customizado, como validação de CPF/CNPJ.)
+@[3] (Se a validação for `uniqueness: true` o registro não pode ser feito caso haja algum outro registro com o mesmo título no banco. Nesse caso, a opção `scope: :author` é passada, então podem existir dois livros com o mesmo nome, desde que sejam de diferentes autores.
+@[8] (`#valid?` checa as validações do model e retorna `true` ou `false`. É chamado automaticamente quando se chama `#save`.)
+@[9] (`#errors` array de erros que é populado quando `#valid?` é chamado. Retorna um array vazio caso não haja nenhum erro.)
+@[10-11] (`save` retorna `false` se alguma validação falhar; `save!` dá um erro `ActiveRecord::RecordInvalid`.)
 
 ---
 @title[Callbacks]
@@ -170,6 +178,78 @@ b.save
 @[12] (Cria os métodos `#books`, `#books=`, `book_ids`, `book_ids=`)
 @[17] (Cria os métodos `#author`, `#author=`)
 @[20-25] (Utilização dos models)
+
+---
+@title[Many-to-Many]
+#### @size[0.6em](Many to Many)
+
+```ruby
+create_table :mentors do |t|
+  t.string :name, null: false
+end
+
+create_table :students do |t|
+  t.string :name, null: false
+end
+
+create_join_table :mentors, :students
+
+# app/models/mentor.rb
+class Mentor < ActiveRecord::Base
+  has_and_belongs_to_many :students
+end
+
+# app/models/book.rb
+class Book < ActiveRecord::Base
+  has_and_belongs_to_many :mentors
+end
+```
+@[1-9] (Criando as tabelas)
+@[9] (Cria uma tabela `mentors_students` com as colunas `mentor_id` e `student_id`)
+@[11-19] (Criando os models)
+@[13] (Cria os métodos `#students`, `#students=`, `#student_ids`. `#student_ids=`)
+@[18] (Cria os métodos `#mentors`, `#mentors=`, `#mentor_ids`. `#mentor_ids=`)
+
+---
+@title[Many-to-Many with named join table]
+
+#### @size[0.6em](Many to Many com join table como model)
+
+```ruby
+create_table :mentors do |t|
+  t.string :name, null: false
+end
+
+create_table :students do |t|
+  t.string :name, null: false
+end
+
+create_join_table :mentors, :students, table_name: :mentorships do |t|
+  t.string :subject, null: false
+end
+
+# app/models/mentorship.rb
+class Mentorship < ActiveRecord::Base
+  belongs_to :mentor
+  belongs_to :student
+  validates :subject, presence: true
+end
+
+# app/models/mentor.rb
+class Mentor < ActiveRecord::Base
+  has_many :mentorships
+  has_many :students, through: :mentorships
+end
+
+# app/models/book.rb
+class Book < ActiveRecord::Base
+  has_many :mentorships
+  has_many :mentors, through: :mentorships
+end
+```
+@[9-11] (A tabela agora tem um nome diferente e uma coluna a mais)
+@[13-18] (Mentorship agora é um model com suas próprias validações)
+@[22-23,27-28] (`has_and_belongs_to_many` mudou para `has_many` e `has_many through:`)
 
 ---
 @title[End]
