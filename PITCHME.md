@@ -9,7 +9,7 @@
 
 > Active Record: An object that wraps a row
   in a database table or view, encapsulates the database
-  access, and adds domanin logic on that data.
+  access, and adds domain logic on that data.
 
   *Martin Fowler*, Patterns of Enterprise Application Architecture (p 160)
 
