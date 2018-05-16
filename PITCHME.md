@@ -255,3 +255,7 @@ end
 @title[End]
 
 # Dúvidas?
+
+---
+@title[Post-credits scene]
+### Slides: https://gitpitch.com/jaimerson/bakeru
