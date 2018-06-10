@@ -7,6 +7,7 @@ gem 'pry'
 gem 'activerecord', '5.1.6'
 gem 'pg'
 gem 'rake'
+gem 'rails-erd'
 
 # Graphics
 gem 'opengl'
