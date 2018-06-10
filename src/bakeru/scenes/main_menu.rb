@@ -16,10 +16,10 @@ module Bakeru
         super
         options = {
           'New Game' => -> { game.go_to_scene(CreateCharacter) },
-          'Load Game' => -> { game.go_to_scene(LoadCharacter) },
+          'Load Game' => saved_games? && -> { game.go_to_scene(LoadCharacter) },
           'Options' => -> { puts 'Options' },
           'Quit' => -> { game.close }
-        }
+        }.select { |_, v| v }
         @menu = UI::Menu.new(options)
       end
 
@@ -44,6 +44,12 @@ module Bakeru
           y = (game.height / 2) + FONT_SIZE * index
           font.draw(option.title, x, y, ZOrder::UI, 1, 1, color)
         end
+      end
+
+      private
+
+      def saved_games?
+        Character.any?
       end
     end
   end
