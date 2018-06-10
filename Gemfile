@@ -4,8 +4,9 @@ ruby '2.3.1'
 
 gem 'gosu'
 gem 'pry'
-gem 'activerecord'
+gem 'activerecord', '5.1.6'
 gem 'pg'
+gem 'rake'
 
 group :test do
   gem 'rspec'

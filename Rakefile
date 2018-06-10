@@ -1,5 +1,5 @@
-require "active_record"
 require "yaml"
+require "active_record"
 
 namespace :db do
 

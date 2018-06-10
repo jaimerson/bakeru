@@ -8,6 +8,21 @@
 - Make sure you have ruby 2.3.1 installed (get from rvm.io)
 - Install bundler if you don't already have it `gem install bundler`
 - `bundle install`
+- Modify `config/database.yml` with your database config or create an user `bakeru` with password `bakeru` in your postgres.
+- Create database with `bundle exec rake db:create`
+- Migrate database with `bundle exec rake db:migrate`
+
+## Tests
+
+### Setup
+- Create database with `GOSU_ENV=test bundle exec rake db:create`
+- Migrate database with `GOSU_ENV=test bundle exec rake db:migrate`
+
+### Running
+```
+bundle exec rspec
+```
+
 
 ## Running
 ```
