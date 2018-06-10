@@ -16,7 +16,7 @@ module Bakeru
     def start
       now = Gosu::milliseconds
 
-      if !@time
+      if !defined?(@time) || !@time
         @time = now
       elsif Gosu::milliseconds - @time >= time_per_frame * 1000
         @time = nil

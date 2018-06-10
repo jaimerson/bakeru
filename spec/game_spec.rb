@@ -63,6 +63,7 @@ RSpec.describe Bakeru::Game do
     before do
       allow(Bakeru::Background).to receive(:new).and_return(background)
       allow(Bakeru::Player).to receive(:new).and_return(player)
+      allow(game).to receive(:gl).and_yield
       game.go_to_scene(Bakeru::Scenes::World, character: character)
     end
 
