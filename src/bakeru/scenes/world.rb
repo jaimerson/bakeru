@@ -14,7 +14,8 @@ module Bakeru
         super
         character = options.fetch(:character)
         @player = Player.new(game, character, game.width / 2, game.height / 2)
-        location = Location.build(Bakeru::MapTemplates::DungeonOfDespair)
+        location = character.last_location || create_location
+        update_character_last_location(character, location)
         @background = Background.new(game, location, @player)
       end
 
@@ -39,6 +40,16 @@ module Bakeru
       def draw
         player.draw
         background.draw
+      end
+
+      private
+
+      def create_location
+        Location.build(Bakeru::MapTemplates::DungeonOfDespair).tap(&:save!)
+      end
+
+      def update_character_last_location(character, location)
+        character.update(last_location: location)
       end
     end
   end
