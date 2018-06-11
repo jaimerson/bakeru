@@ -42,6 +42,10 @@ module Bakeru
       current_scene.button_up(id)
     end
 
+    def go_to_main_scene
+      go_to_main_scene(Scenes::MainMenu)
+    end
+
     def go_to_scene(scene_class, options={})
       previous_scene = current_scene
       @current_scene = setup_scene(scene_class, options)

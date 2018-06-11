@@ -26,6 +26,7 @@ module Bakeru
           font.draw(value, font.text_width(key) + 30, 20 * index + FONT_SIZE, ZOrder::UI, 1, 1, 0xff_bfbb30)
         end
         current_animation.start.draw 200, 200, ZOrder::UI, 5, 5
+        font.draw("Confirm: Enter. Delete character: Delete", 10, game.height - 100, ZOrder::UI, 1, 1, 0xff_bfbb30)
       end
 
       def button_down(key_id)
@@ -36,6 +37,8 @@ module Bakeru
           next_character
         when Gosu::KbUp
           previous_character
+        when Gosu::KbDelete
+          delete_character
         end
       end
 
@@ -66,6 +69,15 @@ module Bakeru
       def previous_character
         return @selected_character = characters.last if selected_character == characters.first
         @selected_character = characters[characters.index(selected_character) - 1]
+      end
+
+      def delete_character
+        @selected_character.destroy
+        if (characters - [@selected_character]).any?
+          next_character
+        else
+          game.go_to_main_scene
+        end
       end
 
       def submit

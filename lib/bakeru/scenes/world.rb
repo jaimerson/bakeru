@@ -8,15 +8,15 @@ require 'bakeru/models/location'
 module Bakeru
   module Scenes
     class World < BaseScene
-      attr_reader :player, :background, :bg_sound
+      attr_reader :player, :background, :bg_sound, :location
 
       def initialize(game, options={})
         super
         character = options.fetch(:character)
         @player = Player.new(game, character, game.width / 2, game.height / 2)
-        location = character.last_location || create_location
+        @location = character.last_location || create_location
         update_character_last_location(character, location)
-        @background = Background.new(game, location, @player)
+        @background = Background.new(game, @location, @player)
       end
 
       def setup
