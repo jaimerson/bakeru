@@ -5,6 +5,7 @@
   化ける: to appear in disguise, take the form of, change for the worse, corrupt
 
 ## Installing
+- Install [Gosu's dependencies](https://github.com/gosu/gosu/wiki/getting-started-on-linux)
 - Make sure you have ruby 2.3.1 installed (get from rvm.io)
 - Install bundler if you don't already have it `gem install bundler`
 - `bundle install`
@@ -27,6 +28,14 @@ bundle exec rspec
 ## Running
 ```
 ruby main.rb
+```
+
+## Generating ERD
+
+Make sure you have `graphviz` installed and run:
+
+```
+bundle exec erd --inheritance
 ```
 
 ## Acknowledgments
