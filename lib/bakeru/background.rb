@@ -47,7 +47,7 @@ module Bakeru
       glShadeModel(GL_SMOOTH)
       glMaterialfv(GL_FRONT, GL_SPECULAR, [0.3, 0.3, 0.3, 0.0])
       glMaterialfv(GL_FRONT, GL_SHININESS, [100.0, 0.5, 0.0, 0.0])
-      glLightfv(GL_LIGHT0, GL_POSITION, [(player.x / game.width.to_f) * 8.0 + TILE_SIZE, (game.height - player.y) / 100.0, 1.8, 0.45])
+      glLightfv(GL_LIGHT0, GL_POSITION, [(player.x / game.width.to_f) * 8.0 + TILE_SIZE, (game.height - player.y) / 100.0, player.magic / 5.0, 0.45])
       glEnable(GL_LIGHTING);
       glEnable(GL_LIGHT0);
       glEnable(GL_DEPTH_TEST);

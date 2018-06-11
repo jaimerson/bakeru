@@ -15,7 +15,7 @@ module Bakeru
 
     attr_reader :animations, :direction, :moving, :game, :current_action, :x, :y
 
-    def_delegators :@character, :color, :weapon
+    def_delegators :@character, :color, :weapon, :magic, :endurance
 
     attr_accessor :vel_x, :vel_y
 
@@ -57,12 +57,13 @@ module Bakeru
       @current_action = :walk
       @direction = direction
       @moving = true
+      speed = SPEED + endurance / 5.0
 
       {
-        up: ->() { self.vel_y -= SPEED },
-        down: ->() { self.vel_y += SPEED },
-        left: ->() { self.vel_x -= SPEED },
-        right: ->() { self.vel_x += SPEED },
+        up: ->() { self.vel_y -= speed },
+        down: ->() { self.vel_y += speed },
+        left: ->() { self.vel_x -= speed },
+        right: ->() { self.vel_x += speed },
       }.fetch(direction).call
     end
 

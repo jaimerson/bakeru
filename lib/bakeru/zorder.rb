@@ -1,7 +1,8 @@
 module Bakeru
   module ZOrder
     BACKGROUND = 0
-    PLAYER = 1
-    UI = 2
+    ITEM = 1
+    PLAYER = 2
+    UI = 3
   end
 end
