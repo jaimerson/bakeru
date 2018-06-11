@@ -5,24 +5,11 @@ require 'bakeru/player'
 require 'bakeru/models/imp'
 
 RSpec.describe Bakeru::Player do
-  let(:character) { Bakeru::Character.new(color: 'red', weapon: 'unarmed') }
+  let(:character) { Bakeru::Character.new(color: 'red') }
   let(:game) { instance_double(Bakeru::Game) }
 
   describe '.new' do
     let(:frames) { Array.new(16) }
-
-    it 'has default options' do
-      expected_color = 'red'
-      expected_weapon = 'unarmed'
-
-      allow(Gosu::Image).to receive(:load_tiles)
-        .and_return(frames)
-
-      player = described_class.new(game, character)
-
-      expect(player.color).to eq(expected_color)
-      expect(player.weapon).to eq(expected_weapon)
-    end
 
     it 'loads the right tiles' do
       width, height = Bakeru::Imp::SPRITE_WIDTH, Bakeru::Imp::SPRITE_HEIGHT

@@ -4,7 +4,7 @@ require 'bakeru/scenes/world'
 require 'bakeru/models/character'
 
 RSpec.describe Bakeru::Game do
-  let(:character) { Bakeru::Character.new(color: 'red', weapon: 'sword') }
+  let(:character) { Bakeru::Character.new(color: 'red', weapon: Bakeru::Weapon.new) }
 
   it 'inherits from Gosu::Window' do
     expect(described_class.ancestors).to include(Gosu::Window)

@@ -9,7 +9,7 @@ RSpec.describe 'Keyboard events' do
   let(:scene) { game.current_scene }
 
   before do
-    character = Bakeru::Character.new(color: 'red', weapon: 'unarmed')
+    character = Bakeru::Character.new(color: 'red')
     game.go_to_scene(Bakeru::Scenes::World, character: character)
     game.update
   end

@@ -19,11 +19,10 @@ module Bakeru
 
     attr_accessor :vel_x, :vel_y
 
-    def initialize(game, character, x=0, y=0, opts={})
+    def initialize(game, character, x=0, y=0, options={})
       @game = game
       @character = character
 
-      options = default_options.merge(opts)
       @direction = options[:direction]
       @moving = false
       @current_action = :walk
@@ -144,21 +143,13 @@ module Bakeru
     end
 
     def load_animation(action, duration=0.5, animation_entity: Animation)
-      sprites = Imp.load_sprites(action, weapon: weapon, color: color)
+      sprites = Imp.load_sprites(action, weapon: weapon&.weapon_type || :unarmed, color: color)
 
       {
         up: animation_entity.new(sprites[0..3], duration),
         left: animation_entity.new(sprites[4..7], duration),
         down: animation_entity.new(sprites[8..11], duration),
         right: animation_entity.new(sprites[12..15], duration)
-      }
-    end
-
-    def default_options
-      {
-        color: :red,
-        weapon: :unarmed,
-        direction: :down
       }
     end
   end

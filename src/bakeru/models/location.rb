@@ -1,5 +1,3 @@
-require 'bakeru/active_record_setup'
-
 module Bakeru
   class Location < ::ActiveRecord::Base
     validates :template, :tiles, presence: true

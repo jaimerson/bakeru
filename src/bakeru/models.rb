@@ -1,0 +1,8 @@
+require 'bakeru/models/imp'
+require 'bakeru/models/character'
+require 'bakeru/models/item'
+require 'bakeru/models/weapon'
+require 'bakeru/models/shield'
+require 'bakeru/models/location'
+require 'bakeru/models/inventory'
+require 'bakeru/models/equipment'

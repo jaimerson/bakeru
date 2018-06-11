@@ -7,6 +7,7 @@ $LOAD_PATH << './src'
 
 require 'gosu'
 require 'pry'
+require 'bakeru/active_record_setup'
 
 ENV['GOSU_ENV'] = 'test'
 
