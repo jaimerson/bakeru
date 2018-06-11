@@ -23,7 +23,7 @@ module Bakeru
       @game = game
       @character = character
 
-      @direction = options[:direction]
+      @direction = options[:direction] || :right
       @moving = false
       @current_action = :walk
 
@@ -143,7 +143,7 @@ module Bakeru
     end
 
     def load_animation(action, duration=0.5, animation_entity: Animation)
-      sprites = Imp.load_sprites(action, weapon: weapon&.weapon_type || :unarmed, color: color)
+      sprites = Imp.load_sprites(action, weapon: weapon&.weapon_type, color: color)
 
       {
         up: animation_entity.new(sprites[0..3], duration),

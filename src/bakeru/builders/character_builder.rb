@@ -4,7 +4,6 @@ module Bakeru
       BUILDS = [
         {
           color: 'red',
-          weapon: 'unarmed',
           vitality: 10,
           strength: 15,
           magic: 5,
@@ -12,7 +11,6 @@ module Bakeru
         },
         {
           color: 'green',
-          weapon: 'unarmed',
           vitality: 10,
           strength: 10,
           magic: 10,
@@ -20,7 +18,6 @@ module Bakeru
         },
         {
           color: 'blue',
-          weapon: 'unarmed',
           vitality: 10,
           strength: 7,
           magic: 15,

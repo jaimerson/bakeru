@@ -46,15 +46,16 @@ module Bakeru
       private
 
       def current_animation
-        animations[selected_character[:color]]
+        animations[selected_character[:color]][selected_character.weapon&.weapon_type || 'unarmed']
       end
 
       def load_animations
-        Imp::COLORS.map do |color|
-          sprites = Imp.load_sprites(:walk, color: color)
+        Imp::COLORS.product(Imp::WEAPONS).reduce({}) do |acc, (color, weapon)|
+          sprites = Imp.load_sprites(:walk, color: color, weapon: weapon)
           animation = Animation.new(sprites[8..11], 0.5) # walking down, 0.5 seconds per loop
-          [color, animation]
-        end.to_h
+          (acc[color] ||= {})[weapon] = animation
+          acc
+        end
       end
 
       def next_character
