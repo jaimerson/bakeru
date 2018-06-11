@@ -45,8 +45,12 @@ module Bakeru
         end
 
         def item(item_type, map_location:, **kwargs)
-          item = Item.new(type: ITEM_TYPES[item_type], **kwargs)
-          @item_locations << item.build_item_location(map_location: map_location)
+          @item_locations << {
+            map_location: map_location,
+            item_attributes: {
+              type: ITEM_TYPES[item_type], **kwargs
+            }
+          }
         end
 
         def tiles(list_of_tiles, value)
