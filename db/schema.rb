@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611115315) do
+ActiveRecord::Schema.define(version: 20180611174028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20180611115315) do
   create_table "inventories", id: :serial, force: :cascade do |t|
     t.integer "character_id"
     t.index ["character_id"], name: "index_inventories_on_character_id"
+  end
+
+  create_table "item_locations", id: :serial, force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "location_id"
+    t.string "map_location", default: "0,0", null: false
+    t.index ["item_id"], name: "index_item_locations_on_item_id"
+    t.index ["location_id"], name: "index_item_locations_on_location_id"
   end
 
   create_table "items", id: :serial, force: :cascade do |t|

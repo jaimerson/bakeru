@@ -2,22 +2,24 @@ module Bakeru
   module MapTemplates
     class Base
       class << self
-        attr_accessor :map
+        attr_accessor :map, :item_locations
 
         def define_map(x_tiles, y_tiles, &block)
           map = Map.new(x_tiles, y_tiles)
           map.instance_eval(&block)
           self.map = map.tile_names
+          self.item_locations = map.item_locations
         end
       end
 
       class Map
-        attr_reader :number_of_x_tiles, :number_of_y_tiles
+        attr_reader :number_of_x_tiles, :number_of_y_tiles, :item_locations
 
         def initialize(number_of_x_tiles, number_of_y_tiles)
           @number_of_x_tiles = number_of_x_tiles
           @number_of_y_tiles = number_of_y_tiles
           @custom_tiles = {}
+          @item_locations = []
         end
 
         def default_tile(tile)
@@ -42,12 +44,24 @@ module Bakeru
           tiles
         end
 
+        def item(item_type, map_location:, **kwargs)
+          item = Item.new(type: ITEM_TYPES[item_type], **kwargs)
+          @item_locations << item.build_item_location(map_location: map_location)
+        end
+
         def tiles(list_of_tiles, value)
           list_of_tiles.each do |tile|
             @custom_tiles[tile] = value
           end
         end
 
+        private
+
+        ITEM_TYPES = {
+          weapon: 'Bakeru::Weapon',
+          shield: 'Bakeru::Shield',
+          consumable: 'Bakeru::Consumable'
+        }
       end
     end
   end

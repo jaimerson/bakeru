@@ -7,6 +7,9 @@ module Bakeru
         default_tile '0036_floor_default'
         tiles [[5, 5]], '0014_floor_default'
         tiles [[5, 6]], '0015_floor_default'
+
+        item :weapon, weapon_type: 'sword', name: 'Sword of Eternal Evil', damage: 100,
+          map_location: '7,7'
       end
     end
   end
