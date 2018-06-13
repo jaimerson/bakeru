@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'src/bakeru/animation'
+require 'bakeru/animation'
 
 RSpec.describe Bakeru::Animation do
   subject(:animation) { described_class.new(frames, time_in_secs) }

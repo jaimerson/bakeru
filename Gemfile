@@ -8,6 +8,7 @@ gem 'activerecord', '5.1.6'
 gem 'pg'
 gem 'rake'
 gem 'rails-erd'
+gem 'yard'
 
 # Graphics
 gem 'opengl'
