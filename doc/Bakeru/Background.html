@@ -104,7 +104,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class loads and draws the tiles for a given location.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
   
     <h2>
       Constant Summary
@@ -114,7 +125,18 @@
     <dl class="constants">
       
         <dt id="TILE_SIZE-constant" class="">TILE_SIZE =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>A central point to modifying tile size</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
@@ -323,7 +345,28 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>game</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Game.html" title="Bakeru::Game (class)">Bakeru::Game</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>a game instance</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -331,9 +374,6 @@
       <pre class="lines">
 
 
-15
-16
-17
 18
 19
 20
@@ -345,10 +385,13 @@
 26
 27
 28
-29</pre>
+29
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_player'>player</span><span class='rparen'>)</span>
   <span class='ivar'>@game</span> <span class='op'>=</span> <span class='id identifier rubyid_game'>game</span>
@@ -403,12 +446,12 @@
       <pre class="lines">
 
 
-12
 13
-14</pre>
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_game'>game</span>
   <span class='ivar'>@game</span>
@@ -446,12 +489,12 @@
       <pre class="lines">
 
 
-12
 13
-14</pre>
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_location'>location</span>
   <span class='ivar'>@location</span>
@@ -489,12 +532,12 @@
       <pre class="lines">
 
 
-12
 13
-14</pre>
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_player'>player</span>
   <span class='ivar'>@player</span>
@@ -526,8 +569,6 @@
       <pre class="lines">
 
 
-35
-36
 37
 38
 39
@@ -567,10 +608,12 @@
 73
 74
 75
-76</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_draw'>draw</span>
   <span class='id identifier rubyid_glClear'>glClear</span><span class='lparen'>(</span><span class='const'>GL_COLOR_BUFFER_BIT</span> <span class='op'>|</span> <span class='const'>GL_DEPTH_BUFFER_BIT</span><span class='rparen'>)</span> <span class='comment'># clear the screen and the depth buffer
@@ -587,7 +630,7 @@
 </span>  <span class='id identifier rubyid_glShadeModel'>glShadeModel</span><span class='lparen'>(</span><span class='const'>GL_SMOOTH</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_glMaterialfv'>glMaterialfv</span><span class='lparen'>(</span><span class='const'>GL_FRONT</span><span class='comma'>,</span> <span class='const'>GL_SPECULAR</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='float'>0.3</span><span class='comma'>,</span> <span class='float'>0.3</span><span class='comma'>,</span> <span class='float'>0.3</span><span class='comma'>,</span> <span class='float'>0.0</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_glMaterialfv'>glMaterialfv</span><span class='lparen'>(</span><span class='const'>GL_FRONT</span><span class='comma'>,</span> <span class='const'>GL_SHININESS</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='float'>100.0</span><span class='comma'>,</span> <span class='float'>0.5</span><span class='comma'>,</span> <span class='float'>0.0</span><span class='comma'>,</span> <span class='float'>0.0</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_glLightfv'>glLightfv</span><span class='lparen'>(</span><span class='const'>GL_LIGHT0</span><span class='comma'>,</span> <span class='const'>GL_POSITION</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>/</span> <span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='float'>8.0</span> <span class='op'>+</span> <span class='const'><span class='object_link'><a href="#TILE_SIZE-constant" title="Bakeru::Background::TILE_SIZE (constant)">TILE_SIZE</a></span></span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span> <span class='op'>-</span> <span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>100.0</span><span class='comma'>,</span> <span class='float'>1.8</span><span class='comma'>,</span> <span class='float'>0.45</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_glLightfv'>glLightfv</span><span class='lparen'>(</span><span class='const'>GL_LIGHT0</span><span class='comma'>,</span> <span class='const'>GL_POSITION</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='lparen'>(</span><span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>/</span> <span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='float'>8.0</span> <span class='op'>+</span> <span class='const'><span class='object_link'><a href="#TILE_SIZE-constant" title="Bakeru::Background::TILE_SIZE (constant)">TILE_SIZE</a></span></span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span> <span class='op'>-</span> <span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>100.0</span><span class='comma'>,</span> <span class='id identifier rubyid_player'>player</span><span class='period'>.</span><span class='id identifier rubyid_magic'>magic</span> <span class='op'>/</span> <span class='float'>5.0</span><span class='comma'>,</span> <span class='float'>0.45</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_glEnable'>glEnable</span><span class='lparen'>(</span><span class='const'>GL_LIGHTING</span><span class='rparen'>)</span><span class='semicolon'>;</span>
   <span class='id identifier rubyid_glEnable'>glEnable</span><span class='lparen'>(</span><span class='const'>GL_LIGHT0</span><span class='rparen'>)</span><span class='semicolon'>;</span>
   <span class='id identifier rubyid_glEnable'>glEnable</span><span class='lparen'>(</span><span class='const'>GL_DEPTH_TEST</span><span class='rparen'>)</span><span class='semicolon'>;</span>
@@ -634,15 +677,13 @@
       <pre class="lines">
 
 
-31
-32
-33</pre>
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/background.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
-
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -654,7 +695,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun 13 11:46:26 2018 by
+  Generated on Wed Jun 13 19:54:40 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.14 (ruby-2.3.1).
 </div>

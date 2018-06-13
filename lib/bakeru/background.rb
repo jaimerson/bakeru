@@ -5,13 +5,16 @@ require 'glu'
 require 'glut'
 
 module Bakeru
+  # This class loads and draws the tiles for a given location.
   class Background
     include Gl
     include Glu
 
     attr_reader :location, :game, :player
+    # A central point to modifying tile size
     TILE_SIZE = 1
 
+    # @param [Bakeru::Game] game - a game instance
     def initialize(game, location, player)
       @game = game
       @location = location
@@ -29,7 +32,6 @@ module Bakeru
     end
 
     def update
-
     end
 
     def draw

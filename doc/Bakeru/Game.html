@@ -106,7 +106,23 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Main entry point for the game. This class manages the current scene which
+can be changed with the `#go_to_scene` method. It delegates the main events
+of `Gosu::Window`, such as drawing, updating and handling keystrokes, to
+the current scene.</p>
 
+<p>By default it starts with the scene `Bakeru::Scenes::MainMenu`</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -313,6 +329,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#go_to_main_scene-instance_method" title="#go_to_main_scene (instance method)">#<strong>go_to_main_scene</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#go_to_scene-instance_method" title="#go_to_scene (instance method)">#<strong>go_to_scene</strong>(scene_class, options = {})  &#x21d2; Object </a>
     
 
@@ -414,16 +452,16 @@
       <pre class="lines">
 
 
-15
-16
-17
-18
-19
-20
-21</pre>
+21
+22
+23
+24
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@width</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:width</span><span class='rparen'>)</span>
@@ -470,12 +508,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_scene'>current_scene</span>
   <span class='ivar'>@current_scene</span>
@@ -513,12 +551,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_height'>height</span>
   <span class='ivar'>@height</span>
@@ -556,12 +594,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_width'>width</span>
   <span class='ivar'>@width</span>
@@ -593,12 +631,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_default_settings'>default_settings</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_show'>show</span>
@@ -623,22 +661,59 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>the id of the key pressed</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://www.rubydoc.info/github/gosu/gosu/Gosu" target="_parent" title="for reference of key values">for reference of key values</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-33
-34
-35
-36
-37
-38
-39</pre>
+42
+43
+44
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_down'>button_down</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_id'>id</span> <span class='op'>==</span> <span class='const'>Gosu</span><span class='op'>::</span><span class='const'>KB_ESCAPE</span>
@@ -667,12 +742,12 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_up'>button_up</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_current_scene'>current_scene</span><span class='period'>.</span><span class='id identifier rubyid_button_up'>button_up</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -697,19 +772,51 @@
       <pre class="lines">
 
 
-27
-28
-29
-30
-31</pre>
+33
+34
+35
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_draw'>draw</span>
-  <span class='id identifier rubyid_gl'>gl</span> <span class='kw'>do</span>
+  <span class='comment'># Enable OpenGL rendering
+</span>  <span class='id identifier rubyid_gl'>gl</span> <span class='kw'>do</span>
     <span class='id identifier rubyid_current_scene'>current_scene</span><span class='period'>.</span><span class='id identifier rubyid_draw'>draw</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="go_to_main_scene-instance_method">
+  
+    #<strong>go_to_main_scene</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_go_to_main_scene'>go_to_main_scene</span>
+  <span class='id identifier rubyid_go_to_main_scene'>go_to_main_scene</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Scenes.html" title="Bakeru::Scenes (module)">Scenes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Scenes/MainMenu.html" title="Bakeru::Scenes::MainMenu (class)">MainMenu</a></span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -725,20 +832,69 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scene_class</span>
+      
+      
+        <span class='type'>(<tt>Bakeru::Scene::Base</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>the scene class to setup</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>the options to pass to scene initialization</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-45
-46
-47
-48
-49</pre>
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_go_to_scene'>go_to_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_scene_class'>scene_class</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_scene'>previous_scene</span> <span class='op'>=</span> <span class='id identifier rubyid_current_scene'>current_scene</span>
@@ -765,12 +921,12 @@
       <pre class="lines">
 
 
-23
-24
-25</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/game.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_current_scene'>current_scene</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span>
@@ -785,7 +941,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun 13 11:46:26 2018 by
+  Generated on Wed Jun 13 19:54:39 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.14 (ruby-2.3.1).
 </div>

@@ -6,6 +6,9 @@ require 'bakeru/models/character'
 require 'bakeru/models/imp'
 
 module Bakeru
+  # This class is the entity responsible for handling player movement
+  # and rendering. It wraps around a `Bakeru::Character` and delegates
+  # methods related to stats and inventory to it.
   class Player
     SCALE = 1.5
     SPEED = 3
@@ -19,6 +22,11 @@ module Bakeru
 
     attr_accessor :vel_x, :vel_y
 
+    # @param [Bakeru::Game] game - the game object
+    # @param [Bakeru::Character] character
+    # @param [Numeric] x - the x position for the player to start in
+    # @param [Numeric] y - the y position for the character to start in
+    # @param [Hash] options - other options for the player
     def initialize(game, character, x=0, y=0, options={})
       @game = game
       @character = character

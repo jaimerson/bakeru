@@ -104,7 +104,20 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class is the entity responsible for handling player movement and
+rendering. It wraps around a `Bakeru::Character` and delegates methods
+related to stats and inventory to it.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
   
     <h2>
       Constant Summary
@@ -634,7 +647,96 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>game</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Game.html" title="Bakeru::Game (class)">Bakeru::Game</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>the game object</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>character</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Character.html" title="Bakeru::Character (class)">Bakeru::Character</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>the x position for the player to start in</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>the y position for the character to start in</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul><li>
+<p>other options for the player</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -642,24 +744,24 @@
       <pre class="lines">
 
 
-22
-23
-24
-25
-26
-27
-28
-29
 30
 31
 32
 33
 34
 35
-36</pre>
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='comma'>,</span> <span class='id identifier rubyid_character'>character</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='op'>=</span><span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@game</span> <span class='op'>=</span> <span class='id identifier rubyid_game'>game</span>
@@ -714,12 +816,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_animations'>animations</span>
   <span class='ivar'>@animations</span>
@@ -757,12 +859,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_action'>current_action</span>
   <span class='ivar'>@current_action</span>
@@ -800,12 +902,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_direction'>direction</span>
   <span class='ivar'>@direction</span>
@@ -843,12 +945,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_game'>game</span>
   <span class='ivar'>@game</span>
@@ -886,12 +988,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_moving'>moving</span>
   <span class='ivar'>@moving</span>
@@ -929,12 +1031,12 @@
       <pre class="lines">
 
 
-20
-21
-22</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_vel_x'>vel_x</span>
   <span class='ivar'>@vel_x</span>
@@ -972,12 +1074,12 @@
       <pre class="lines">
 
 
-20
-21
-22</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_vel_y'>vel_y</span>
   <span class='ivar'>@vel_y</span>
@@ -1015,12 +1117,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_x'>x</span>
   <span class='ivar'>@x</span>
@@ -1058,12 +1160,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_y'>y</span>
   <span class='ivar'>@y</span>
@@ -1095,14 +1197,14 @@
       <pre class="lines">
 
 
-79
-80
-81
-82
-83</pre>
+88
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_attack'>attack</span>
   <span class='ivar'>@current_action</span> <span class='op'>=</span> <span class='symbol'>:attack</span>
@@ -1129,12 +1231,12 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_down'>button_down</span><span class='lparen'>(</span><span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_handle_key_down'>handle_key_down</span><span class='lparen'>(</span><span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
@@ -1159,12 +1261,12 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_up'>button_up</span><span class='lparen'>(</span><span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_handle_key_up'>handle_key_up</span><span class='lparen'>(</span><span class='id identifier rubyid_key_id'>key_id</span><span class='rparen'>)</span>
@@ -1189,19 +1291,19 @@
       <pre class="lines">
 
 
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98</pre>
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_draw'>draw</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_moving'>moving</span>
@@ -1233,12 +1335,12 @@
       <pre class="lines">
 
 
-85
-86
-87</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='ivar'>@moving</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -1263,18 +1365,18 @@
       <pre class="lines">
 
 
-69
-70
-71
-72
-73
-74
-75
-76
-77</pre>
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop_walking'>stop_walking</span><span class='lparen'>(</span><span class='id identifier rubyid_direction'>direction</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='lbracket'>[</span><span class='symbol'>:left</span><span class='comma'>,</span> <span class='symbol'>:right</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_direction'>direction</span>
@@ -1305,18 +1407,18 @@
       <pre class="lines">
 
 
-38
-39
-40
-41
-42
-43
-44
-45
-46</pre>
+46
+47
+48
+49
+50
+51
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='ivar'>@x</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='ivar'>@x</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_x'>vel_x</span><span class='rparen'>)</span>
@@ -1347,32 +1449,34 @@
       <pre class="lines">
 
 
-56
-57
-58
-59
-60
-61
-62
-63
 64
 65
 66
-67</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/player.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_walk'>walk</span><span class='lparen'>(</span><span class='id identifier rubyid_direction'>direction</span><span class='rparen'>)</span>
   <span class='ivar'>@current_action</span> <span class='op'>=</span> <span class='symbol'>:walk</span>
   <span class='ivar'>@direction</span> <span class='op'>=</span> <span class='id identifier rubyid_direction'>direction</span>
   <span class='ivar'>@moving</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_speed'>speed</span> <span class='op'>=</span> <span class='id identifier rubyid_endurance'>endurance</span> <span class='op'>/</span> <span class='float'>3.0</span>
 
   <span class='lbrace'>{</span>
-    <span class='label'>up:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_y'>vel_y</span> <span class='op'>-=</span> <span class='const'><span class='object_link'><a href="#SPEED-constant" title="Bakeru::Player::SPEED (constant)">SPEED</a></span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
-    <span class='label'>down:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_y'>vel_y</span> <span class='op'>+=</span> <span class='const'><span class='object_link'><a href="#SPEED-constant" title="Bakeru::Player::SPEED (constant)">SPEED</a></span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
-    <span class='label'>left:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_x'>vel_x</span> <span class='op'>-=</span> <span class='const'><span class='object_link'><a href="#SPEED-constant" title="Bakeru::Player::SPEED (constant)">SPEED</a></span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
-    <span class='label'>right:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_x'>vel_x</span> <span class='op'>+=</span> <span class='const'><span class='object_link'><a href="#SPEED-constant" title="Bakeru::Player::SPEED (constant)">SPEED</a></span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>up:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_y'>vel_y</span> <span class='op'>-=</span> <span class='id identifier rubyid_speed'>speed</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>down:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_y'>vel_y</span> <span class='op'>+=</span> <span class='id identifier rubyid_speed'>speed</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>left:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_x'>vel_x</span> <span class='op'>-=</span> <span class='id identifier rubyid_speed'>speed</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>right:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vel_x'>vel_x</span> <span class='op'>+=</span> <span class='id identifier rubyid_speed'>speed</span> <span class='rbrace'>}</span><span class='comma'>,</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_direction'>direction</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1385,7 +1489,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun 13 11:46:26 2018 by
+  Generated on Wed Jun 13 19:54:39 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.14 (ruby-2.3.1).
 </div>

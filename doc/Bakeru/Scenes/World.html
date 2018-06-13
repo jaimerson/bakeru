@@ -169,6 +169,35 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#location-instance_method" title="#location (instance method)">#<strong>location</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute location.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#player-instance_method" title="#player (instance method)">#<strong>player</strong>  &#x21d2; Object </a>
     
 
@@ -408,9 +437,9 @@
   <span class='kw'>super</span>
   <span class='id identifier rubyid_character'>character</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:character</span><span class='rparen'>)</span>
   <span class='ivar'>@player</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Player.html" title="Bakeru::Player (class)">Player</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Player.html#initialize-instance_method" title="Bakeru::Player#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='comma'>,</span> <span class='id identifier rubyid_character'>character</span><span class='comma'>,</span> <span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span> <span class='op'>/</span> <span class='int'>2</span><span class='comma'>,</span> <span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span> <span class='op'>/</span> <span class='int'>2</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_location'>location</span> <span class='op'>=</span> <span class='id identifier rubyid_character'>character</span><span class='period'>.</span><span class='id identifier rubyid_last_location'>last_location</span> <span class='op'>||</span> <span class='id identifier rubyid_create_location'>create_location</span>
+  <span class='ivar'>@location</span> <span class='op'>=</span> <span class='id identifier rubyid_character'>character</span><span class='period'>.</span><span class='id identifier rubyid_last_location'>last_location</span> <span class='op'>||</span> <span class='id identifier rubyid_create_location'>create_location</span>
   <span class='id identifier rubyid_update_character_last_location'>update_character_last_location</span><span class='lparen'>(</span><span class='id identifier rubyid_character'>character</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
-  <span class='ivar'>@background</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Background.html" title="Bakeru::Background (class)">Background</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Background.html#initialize-instance_method" title="Bakeru::Background#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='ivar'>@player</span><span class='rparen'>)</span>
+  <span class='ivar'>@background</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Background.html" title="Bakeru::Background (class)">Background</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Background.html#initialize-instance_method" title="Bakeru::Background#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_game'>game</span><span class='comma'>,</span> <span class='ivar'>@location</span><span class='comma'>,</span> <span class='ivar'>@player</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -502,6 +531,49 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bg_sound'>bg_sound</span>
   <span class='ivar'>@bg_sound</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    #<strong>location</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute location</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bakeru/scenes/world.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_location'>location</span>
+  <span class='ivar'>@location</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -719,7 +791,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun 13 11:46:26 2018 by
+  Generated on Wed Jun 13 19:54:40 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.14 (ruby-2.3.1).
 </div>
