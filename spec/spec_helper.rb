@@ -1,3 +1,5 @@
+ENV['GOSU_ENV'] = 'test'
+
 $LOAD_PATH << File.join(File.expand_path(File.dirname(__FILE__)), '..')
 require 'rubygems'
 require 'bundler/setup'
@@ -8,8 +10,6 @@ $LOAD_PATH << './src'
 require 'gosu'
 require 'pry'
 require 'bakeru/active_record_setup'
-
-ENV['GOSU_ENV'] = 'test'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
