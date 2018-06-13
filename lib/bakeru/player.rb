@@ -57,7 +57,7 @@ module Bakeru
       @current_action = :walk
       @direction = direction
       @moving = true
-      speed = SPEED + endurance / 5.0
+      speed = endurance / 3.0
 
       {
         up: ->() { self.vel_y -= speed },

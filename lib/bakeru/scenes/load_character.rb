@@ -16,6 +16,7 @@ module Bakeru
       def setup
         @font = Gosu::Font.new(FONT_SIZE, name: 'Courier')
         @animations = load_animations
+        # @characters = Character.all.to_a
         @characters = Character.includes(:weapon).all.to_a
         @selected_character = @characters.first
       end
